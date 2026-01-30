@@ -1,0 +1,29 @@
+{
+  "name": "foodai-prototype",
+  "version": "1.0.0",
+  "description": "AI-powered food discovery platform with social features, nutrition tracking, and interactive maps",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=index.html",
+    "dev": "live-server --port=3000 --open=index.html --watch=.",
+    "serve": "http-server -p 3000 -o"
+  },
+  "keywords": [
+    "food",
+    "ai",
+    "nutrition",
+    "restaurant",
+    "social",
+    "maps"
+  ],
+  "author": "FoodAI Team",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/foodai-prototype.git"
+  }
+}

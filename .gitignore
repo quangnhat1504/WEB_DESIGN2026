@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+*.zip
+image/extracted*/
+image/*.zip
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

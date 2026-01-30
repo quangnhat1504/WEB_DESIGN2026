@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodAI - My Orders</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/new-components.css">
+
+    <style>
+        body {
+            margin: 0;
+            background: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: var(--font-family);
+        }
+
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar-left {
+            width: 280px;
+            background: var(--color-background);
+            border-right: 1px solid var(--color-border);
+            padding: 24px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+        @media (min-width: 1024px) {
+            .sidebar-left {
+                display: flex;
+            }
+        }
+
+        .main-content {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            border-bottom: 1px solid var(--color-border);
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            color: var(--color-text-primary);
+        }
+
+        .tab.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .order-card {
+            background: linear-gradient(135deg, var(--color-surface-elevated), rgba(54, 31, 23, 0.8));
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .order-card:hover {
+            box-shadow: 0 8px 24px rgba(255, 105, 51, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .order-id {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .order-date {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-completed {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--color-secondary);
+        }
+
+        .status-delivering {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--color-info);
+        }
+
+        .status-preparing {
+            background: rgba(234, 179, 8, 0.15);
+            color: var(--color-warning);
+        }
+
+        .status-cancelled {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--color-error);
+        }
+
+        .order-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .item-image {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .item-details {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .item-price {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--color-primary);
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .order-total {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .total-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-top: 4px;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            background: var(--color-surface-elevated);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <div>
+                <!-- Logo -->
+                <div class="logo" style="display: flex; align-items: center; gap: 12px; margin-bottom: 32px;">
+                    <div
+                        style="width: 40px; height: 40px; background: linear-gradient(135deg, var(--color-primary), #ea580c); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 20px; box-shadow: 0 4px 12px rgba(255, 105, 51, 0.2);">
+                        F</div>
+                    <div>
+                        <h1 style="font-size: 18px; font-weight: 700; margin: 0;">FoodAI</h1>
+                        <span
+                            style="font-size: 12px; color: var(--color-text-secondary); font-weight: 500;">Premium</span>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav style="display: flex; flex-direction: column; gap: 8px;">
+                    <a href="home.html" class="nav-link"
+                        style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; color: var(--color-text-secondary); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px;">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">home</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="discovery.html" class="nav-link"
+                        style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; color: var(--color-text-secondary); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px;">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">explore</span>
+                        <span>Explore</span>
+                    </a>
+                    <a href="ai-nutritionist.html" class="nav-link"
+                        style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; color: var(--color-text-secondary); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px;">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">psychology</span>
+                        <span>AI Nutritionist</span>
+                    </a>
+                    <a href="orders.html" class="nav-link active"
+                        style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; background: var(--color-primary); color: white; text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px; box-shadow: 0 4px 12px rgba(255, 105, 51, 0.25);">
+                        <span class="material-symbols-outlined"
+                            style="font-size: 24px; font-variation-settings: 'FILL' 1;">receipt_long</span>
+                        <span>Orders</span>
+                    </a>
+                    <a href="saved.html" class="nav-link"
+                        style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; color: var(--color-text-secondary); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px;">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">favorite</span>
+                        <span>Saved</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- User Profile -->
+            <div
+                style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--color-surface-elevated); border-radius: 12px; border: 1px solid var(--color-border);">
+                <img src="https://i.pravatar.cc/80?img=5" alt="User"
+                    style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                <div style="flex: 1; min-width: 0;">
+                    <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Sarah Nguyen</div>
+                    <div style="font-size: 12px; color: var(--color-text-secondary);">Gold Member</div>
+                </div>
+                <button class="btn-icon">
+                    <span class="material-symbols-outlined" style="font-size: 20px;">more_vert</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header style="margin-bottom: 32px;">
+                <h2 style="font-size: 36px; font-weight: 700; margin: 0 0 8px 0;">My Orders</h2>
+                <p style="font-size: 16px; color: var(--color-text-secondary); margin: 0;">Track and manage your food
+                    orders</p>
+            </header>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active">All Orders</button>
+                <button class="tab">Delivering</button>
+                <button class="tab">Completed</button>
+                <button class="tab">Cancelled</button>
+            </div>
+
+            <!-- Orders List -->
+            <div class="orders-list">
+                <!-- Order 1 - Delivering -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024012</div>
+                            <div class="order-date">Today, 6:15 PM</div>
+                        </div>
+                        <span class="status-badge status-delivering">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">local_shipping</span>
+                            Delivering
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=200&q=80"
+                                alt="Banh Mi" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Spicy Special Banh Mi</div>
+                                <div class="item-details">x2 • Extra pickled carrots</div>
+                            </div>
+                            <div class="item-price">₫120,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫120,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">Track Order</button>
+                            <button class="btn btn-primary">Contact Support</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 2 - Preparing -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024011</div>
+                            <div class="order-date">Today, 12:30 PM</div>
+                        </div>
+                        <span class="status-badge status-preparing">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">cooking</span>
+                            Preparing
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=200&q=80" alt="Pho"
+                                class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Signature Pho Bo</div>
+                                <div class="item-details">x1 • Large size</div>
+                            </div>
+                            <div class="item-price">₫85,000</div>
+                        </div>
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=200&q=80"
+                                alt="Coffee" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Vietnamese Iced Coffee</div>
+                                <div class="item-details">x1 • Less sugar</div>
+                            </div>
+                            <div class="item-price">₫35,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫120,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 3 - Completed -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024010</div>
+                            <div class="order-date">Yesterday, 7:45 PM</div>
+                        </div>
+                        <span class="status-badge status-completed">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+                            Completed
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200&q=80"
+                                alt="Healthy Bowl" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Healthy Power Bowl</div>
+                                <div class="item-details">x1 • Extra avocado</div>
+                            </div>
+                            <div class="item-price">₫95,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫95,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">star</span>
+                                Rate Order
+                            </button>
+                            <button class="btn btn-primary">Reorder</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 4 - Completed -->
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024009</div>
+                            <div class="order-date">Jan 28, 2024</div>
+                        </div>
+                        <span class="status-badge status-completed">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+                            Completed
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=200&q=80"
+                                alt="Bun Bo Hue" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Bun Bo Hue</div>
+                                <div class="item-details">x2</div>
+                            </div>
+                            <div class="item-price">₫140,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫140,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">View Receipt</button>
+                            <button class="btn btn-primary">Reorder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function () {
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
