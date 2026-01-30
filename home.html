@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -29,6 +29,7 @@
 
         .app-layout {
             display: flex;
+            flex-direction: row;
             min-height: 100vh;
         }
 
@@ -43,6 +44,7 @@
             position: sticky;
             top: 0;
             height: 100vh;
+            order: 1;
         }
 
         @media (min-width: 1024px) {
@@ -56,6 +58,7 @@
             max-width: 720px;
             margin: 0 auto;
             padding: 32px 16px;
+            order: 2;
         }
 
         .sidebar-right {
@@ -70,6 +73,7 @@
             top: 0;
             height: 100vh;
             overflow-y: auto;
+            order: 3;
         }
 
         @media (min-width: 1280px) {
@@ -93,7 +97,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: #ffffff;
             font-weight: 700;
             font-size: 20px;
             box-shadow: 0 4px 12px rgba(255, 105, 51, 0.2);
@@ -113,13 +117,13 @@
         }
 
         .nav-link:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--color-surface-elevated);
             color: var(--color-text-primary);
         }
 
         .nav-link.active {
             background: var(--color-primary);
-            color: white;
+            color: #ffffff;
             box-shadow: 0 4px 12px rgba(255, 105, 51, 0.25);
         }
 
@@ -150,10 +154,10 @@
         }
 
         .widget {
-            background: linear-gradient(135deg, var(--color-surface-elevated), rgba(54, 31, 23, 0.8));
+            background: var(--color-surface);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-md);
             border: 1px solid var(--color-border);
         }
 
@@ -208,6 +212,10 @@
                     <a href="discovery.html" class="nav-link">
                         <span class="material-symbols-outlined">explore</span>
                         <span>Explore</span>
+                    </a>
+                    <a href="map.html" class="nav-link">
+                        <span class="material-symbols-outlined">map</span>
+                        <span>Map</span>
                     </a>
                     <a href="#" class="nav-link">
                         <span class="material-symbols-outlined">psychology</span>
@@ -307,7 +315,7 @@
                         <div class="ai-badge-overlay">
                             <div class="ai-badge-icon">
                                 <span class="material-symbols-outlined"
-                                    style="font-size: 12px; color: white;">star</span>
+                                    style="font-size: 12px;">star</span>
                             </div>
                             <span>Protein rich • 650 kcal</span>
                         </div>
@@ -360,10 +368,10 @@
 
                     <div class="feed-post-image">
                         <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=800&q=80" alt="Pho">
-                        <div class="ai-badge-overlay" style="background: rgba(34, 197, 94, 0.8);">
+                        <div class="ai-badge-overlay">
                             <div class="ai-badge-icon ai-badge-calories">
                                 <span class="material-symbols-outlined"
-                                    style="font-size: 12px; color: white;">eco</span>
+                                    style="font-size: 12px;">eco</span>
                             </div>
                             <span>Balanced • 480 kcal</span>
                         </div>
@@ -417,10 +425,10 @@
                     <div class="feed-post-image">
                         <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&q=80"
                             alt="Healthy Bowl">
-                        <div class="ai-badge-overlay" style="background: rgba(59, 130, 246, 0.8);">
+                        <div class="ai-badge-overlay">
                             <div class="ai-badge-icon">
                                 <span class="material-symbols-outlined"
-                                    style="font-size: 12px; color: white;">local_fire_department</span>
+                                    style="font-size: 12px;">local_fire_department</span>
                             </div>
                             <span>Low Calorie • 320 kcal</span>
                         </div>
@@ -476,7 +484,7 @@
                         <div class="ai-badge-overlay">
                             <div class="ai-badge-icon">
                                 <span class="material-symbols-outlined"
-                                    style="font-size: 12px; color: white;">star</span>
+                                    style="font-size: 12px;">star</span>
                             </div>
                             <span>High Protein • 750 kcal</span>
                         </div>
@@ -531,10 +539,10 @@
                     <div class="feed-post-image">
                         <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800&q=80"
                             alt="Spring Rolls">
-                        <div class="ai-badge-overlay" style="background: rgba(34, 197, 94, 0.8);">
+                        <div class="ai-badge-overlay">
                             <div class="ai-badge-icon ai-badge-calories">
                                 <span class="material-symbols-outlined"
-                                    style="font-size: 12px; color: white;">eco</span>
+                                    style="font-size: 12px;">eco</span>
                             </div>
                             <span>Plant-Based • 280 kcal</span>
                         </div>
@@ -641,7 +649,7 @@
                         <div class="ai-badge-overlay">
                             <div class="ai-badge-icon">
                                 <span class="material-symbols-outlined"
-                                    style="font-size: 12px; color: white;">star</span>
+                                    style="font-size: 12px;">star</span>
                             </div>
                             <span>High Protein • 890 kcal</span>
                         </div>
@@ -694,10 +702,10 @@
                     <div class="feed-post-image">
                         <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80"
                             alt="Vietnamese Coffee">
-                        <div class="ai-badge-overlay" style="background: rgba(59, 130, 246, 0.8);">
+                        <div class="ai-badge-overlay">
                             <div class="ai-badge-icon">
                                 <span class="material-symbols-outlined"
-                                    style="font-size: 12px; color: white;">coffee</span>
+                                    style="font-size: 12px;">coffee</span>
                             </div>
                             <span>Energy Boost • 180 kcal</span>
                         </div>
@@ -756,31 +764,31 @@
                     </div>
                 </div>
                 <div
-                    style="width: 24px; height: 24px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
-                    <span class="material-symbols-outlined" style="font-size: 16px; font-weight: 700;">check</span>
+                    style="width: 24px; height: 24px; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span class="material-symbols-outlined" style="font-size: 16px; font-weight: 700; color: #ffffff;">check</span>
                 </div>
             </div>
 
             <!-- AI Dinner Suggestion -->
-            <div class="widget">
-                <div style="position: absolute; top: 0; right: 0; padding: 16px; opacity: 0.1;">
-                    <span class="material-symbols-outlined" style="font-size: 64px;">auto_awesome</span>
+            <div style="background: #ffffff !important; border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); border: 1px solid #e5e7eb; position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; right: 0; padding: 16px; opacity: 0.05;">
+                    <span class="material-symbols-outlined" style="font-size: 64px; color: #ff6933;">auto_awesome</span>
                 </div>
                 <div style="position: relative; z-index: 1;">
-                    <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 4px 0;">Dinner Suggestion</h3>
-                    <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0 0 12px 0;">Based on rainy
+                    <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 4px 0; color: #1f2937;">Dinner Suggestion</h3>
+                    <p style="font-size: 12px; color: #6b7280; margin: 0 0 12px 0;">Based on rainy
                         weather & your preferences.</p>
 
                     <div
-                        style="display: flex; align-items: center; gap: 12px; padding: 8px; background: rgba(0, 0, 0, 0.3); border-radius: 12px;">
+                        style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px;">
                         <img src="https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=200&q=80"
                             alt="Bun Bo Hue" style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover;">
                         <div style="flex: 1;">
-                            <div style="font-weight: 600; font-size: 14px;">Bun Bo Hue</div>
-                            <div style="font-size: 12px; color: var(--color-primary);">High Protein</div>
+                            <div style="font-weight: 600; font-size: 14px; color: #1f2937;">Bun Bo Hue</div>
+                            <div style="font-size: 12px; color: var(--color-primary); font-weight: 600;">High Protein</div>
                         </div>
-                        <button class="btn-icon" style="background: var(--color-primary); color: white;">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">add</span>
+                        <button class="btn-icon" style="background: var(--color-primary); box-shadow: 0 2px 8px rgba(255, 105, 51, 0.3);">
+                            <span class="material-symbols-outlined" style="font-size: 16px; color: #ffffff;">add</span>
                         </button>
                     </div>
                 </div>
@@ -799,11 +807,11 @@
                     <div class="reel-item">
                         <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80" alt="Reel 1">
                         <div
-                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);">
-                            <div style="font-size: 12px; font-weight: 700; color: white; margin-bottom: 4px;">Street
+                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);">
+                            <div style="font-size: 12px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">Street
                                 Food Tour...</div>
                             <div
-                                style="font-size: 10px; color: rgba(255, 255, 255, 0.8); display: flex; align-items: center; gap: 4px;">
+                                style="font-size: 10px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px;">
                                 <span class="material-symbols-outlined" style="font-size: 10px;">visibility</span>
                                 <span>12k</span>
                             </div>
@@ -812,11 +820,11 @@
                     <div class="reel-item">
                         <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80" alt="Reel 2">
                         <div
-                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);">
-                            <div style="font-size: 12px; font-weight: 700; color: white; margin-bottom: 4px;">Best Egg
+                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);">
+                            <div style="font-size: 12px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">Best Egg
                                 Coffee</div>
                             <div
-                                style="font-size: 10px; color: rgba(255, 255, 255, 0.8); display: flex; align-items: center; gap: 4px;">
+                                style="font-size: 10px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px;">
                                 <span class="material-symbols-outlined" style="font-size: 10px;">visibility</span>
                                 <span>8.5k</span>
                             </div>
@@ -825,11 +833,11 @@
                     <div class="reel-item">
                         <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80" alt="Reel 3">
                         <div
-                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);">
-                            <div style="font-size: 12px; font-weight: 700; color: white; margin-bottom: 4px;">Plating
+                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);">
+                            <div style="font-size: 12px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">Plating
                                 Art</div>
                             <div
-                                style="font-size: 10px; color: rgba(255, 255, 255, 0.8); display: flex; align-items: center; gap: 4px;">
+                                style="font-size: 10px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px;">
                                 <span class="material-symbols-outlined" style="font-size: 10px;">visibility</span>
                                 <span>5k</span>
                             </div>
@@ -838,11 +846,11 @@
                     <div class="reel-item">
                         <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80" alt="Reel 4">
                         <div
-                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);">
-                            <div style="font-size: 12px; font-weight: 700; color: white; margin-bottom: 4px;">Vegan
+                            style="position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);">
+                            <div style="font-size: 12px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 4px;">Vegan
                                 Sweets</div>
                             <div
-                                style="font-size: 10px; color: rgba(255, 255, 255, 0.8); display: flex; align-items: center; gap: 4px;">
+                                style="font-size: 10px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 4px;">
                                 <span class="material-symbols-outlined" style="font-size: 10px;">visibility</span>
                                 <span>21k</span>
                             </div>

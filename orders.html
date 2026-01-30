@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -88,7 +88,7 @@
         }
 
         .order-card {
-            background: linear-gradient(135deg, var(--color-surface-elevated), rgba(54, 31, 23, 0.8));
+            background: linear-gradient(135deg, #ffffff, rgba(255, 248, 243, 0.95));
             border: 1px solid var(--color-border);
             border-radius: 16px;
             padding: 24px;
@@ -263,6 +263,11 @@
                         <span class="material-symbols-outlined" style="font-size: 24px;">explore</span>
                         <span>Explore</span>
                     </a>
+                    <a href="map.html" class="nav-link"
+                        style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; color: var(--color-text-secondary); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px;">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">map</span>
+                        <span>Map</span>
+                    </a>
                     <a href="ai-nutritionist.html" class="nav-link"
                         style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; color: var(--color-text-secondary); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px;">
                         <span class="material-symbols-outlined" style="font-size: 24px;">psychology</span>
@@ -352,16 +357,16 @@
                     </div>
                 </div>
 
-                <!-- Order 2 - Preparing -->
+                <!-- Order 2 - Completed -->
                 <div class="order-card">
                     <div class="order-header">
                         <div>
                             <div class="order-id">Order #FD2024011</div>
                             <div class="order-date">Today, 12:30 PM</div>
                         </div>
-                        <span class="status-badge status-preparing">
-                            <span class="material-symbols-outlined" style="font-size: 14px;">cooking</span>
-                            Preparing
+                        <span class="status-badge status-completed">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+                            Completed
                         </span>
                     </div>
 
@@ -392,7 +397,11 @@
                             <div class="total-amount">₫120,000</div>
                         </div>
                         <div class="order-actions">
-                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-outline">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">star</span>
+                                Rate Order
+                            </button>
+                            <button class="btn btn-primary">Reorder</button>
                         </div>
                     </div>
                 </div>

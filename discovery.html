@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -186,7 +186,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95), transparent);
             padding: 20px;
             display: flex;
             flex-direction: column;
@@ -248,6 +248,31 @@
             background: var(--color-surface);
             border-radius: 8px;
         }
+
+        .chip {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chip:hover {
+            background: var(--color-surface-elevated);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .chip.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
     </style>
 </head>
 
@@ -274,6 +299,10 @@
                     <a href="discovery.html" class="nav-link active">
                         <span class="material-symbols-outlined">explore</span>
                         <span>Explore</span>
+                    </a>
+                    <a href="map.html" class="nav-link">
+                        <span class="material-symbols-outlined">map</span>
+                        <span>Map</span>
                     </a>
                     <a href="ai-nutritionist.html" class="nav-link">
                         <span class="material-symbols-outlined">psychology</span>
@@ -347,9 +376,9 @@
                     <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=80" alt="Dish 1">
                     <div class="rank-badge">#1</div>
                     <div class="carousel-overlay">
-                        <h3 style="font-size: 18px; font-weight: 700; color: white; margin: 0 0 8px 0;">Grilled Seafood
+                        <h3 style="font-size: 18px; font-weight: 700; color: var(--color-text-primary); margin: 0 0 8px 0;">Grilled Seafood
                             Platter</h3>
-                        <p style="font-size: 12px; color: rgba(255, 255, 255, 0.8); margin: 0;">Beachside Grill • $28
+                        <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Beachside Grill • 85.000đ
                         </p>
                     </div>
                 </div>
@@ -358,9 +387,9 @@
                     <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Dish 2">
                     <div class="rank-badge" style="background: var(--color-secondary);">#2</div>
                     <div class="carousel-overlay">
-                        <h3 style="font-size: 18px; font-weight: 700; color: white; margin: 0 0 8px 0;">Mediterranean
+                        <h3 style="font-size: 18px; font-weight: 700; color: var(--color-text-primary); margin: 0 0 8px 0;">Mediterranean
                             Salad Bowl</h3>
-                        <p style="font-size: 12px; color: rgba(255, 255, 255, 0.8); margin: 0;">Healthy Bites • $18</p>
+                        <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Healthy Bites • 35.000đ</p>
                     </div>
                 </div>
 
@@ -368,9 +397,9 @@
                     <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80" alt="Dish 3">
                     <div class="rank-badge" style="background: var(--color-info);">#3</div>
                     <div class="carousel-overlay">
-                        <h3 style="font-size: 18px; font-weight: 700; color: white; margin: 0 0 8px 0;">Avocado Toast
+                        <h3 style="font-size: 18px; font-weight: 700; color: var(--color-text-primary); margin: 0 0 8px 0;">Avocado Toast
                             Deluxe</h3>
-                        <p style="font-size: 12px; color: rgba(255, 255, 255, 0.8); margin: 0;">Morning Cafe • $12</p>
+                        <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Morning Cafe • 30.000đ</p>
                     </div>
                 </div>
 
@@ -378,9 +407,9 @@
                     <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Dish 4">
                     <div class="rank-badge" style="background: var(--color-warning);">#4</div>
                     <div class="carousel-overlay">
-                        <h3 style="font-size: 18px; font-weight: 700; color: white; margin: 0 0 8px 0;">Chef's Special
+                        <h3 style="font-size: 18px; font-weight: 700; color: var(--color-text-primary); margin: 0 0 8px 0;">Chef's Special
                             Pasta</h3>
-                        <p style="font-size: 12px; color: rgba(255, 255, 255, 0.8); margin: 0;">Italian Corner • $22</p>
+                        <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Italian Corner • 45.000đ</p>
                     </div>
                 </div>
 
@@ -388,9 +417,9 @@
                     <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=600&q=80" alt="Dish 5">
                     <div class="rank-badge" style="background: var(--color-text-secondary);">#5</div>
                     <div class="carousel-overlay">
-                        <h3 style="font-size: 18px; font-weight: 700; color: white; margin: 0 0 8px 0;">Signature Pho Bo
+                        <h3 style="font-size: 18px; font-weight: 700; color: var(--color-text-primary); margin: 0 0 8px 0;">Signature Pho Bo
                         </h3>
-                        <p style="font-size: 12px; color: rgba(255, 255, 255, 0.8); margin: 0;">Chef Nam • $8</p>
+                        <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0;">Chef Nam • 35.000đ</p>
                     </div>
                 </div>
             </div>
@@ -429,7 +458,7 @@
                         <p class="masonry-card-description">Crispy greens with homemade vinaigrette</p>
                         <div class="masonry-card-footer">
                             <div>
-                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">$15</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">25.000đ</div>
                                 <div style="font-size: 12px; color: var(--color-text-secondary);">320 kcal</div>
                             </div>
                             <button class="btn btn-sm btn-primary">Order</button>
@@ -455,7 +484,7 @@
                         <p class="masonry-card-description">Fluffy pancakes with Greek yogurt and berries</p>
                         <div class="masonry-card-footer">
                             <div>
-                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">$12</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">30.000đ</div>
                                 <div style="font-size: 12px; color: var(--color-text-secondary);">450 kcal</div>
                             </div>
                             <button class="btn btn-sm btn-primary">Order</button>
@@ -465,7 +494,7 @@
 
                 <!-- Card 3 -->
                 <div class="masonry-card">
-                    <div class="masonry-card-image" style="aspect-ratio: 3/4;">
+                    <div class="masonry-card-image">
                         <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Pizza">
                         <div class="ai-badge-overlay ai-badge-calories">
                             <div class="ai-badge-icon">
@@ -480,7 +509,7 @@
                         <p class="masonry-card-description">Classic wood-fired pizza with fresh mozzarella</p>
                         <div class="masonry-card-footer">
                             <div>
-                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">$18</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">65.000đ</div>
                                 <div style="font-size: 12px; color: var(--color-text-secondary);">680 kcal</div>
                             </div>
                             <button class="btn btn-sm btn-primary">Order</button>
@@ -506,7 +535,7 @@
                         <p class="masonry-card-description">Quinoa, roasted veggies, tahini dressing</p>
                         <div class="masonry-card-footer">
                             <div>
-                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">$14</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">35.000đ</div>
                                 <div style="font-size: 12px; color: var(--color-text-secondary);">280 kcal</div>
                             </div>
                             <button class="btn btn-sm btn-primary">Order</button>
@@ -525,7 +554,7 @@
                         <p class="masonry-card-description">Vietnamese baguette loaded with fresh herbs</p>
                         <div class="masonry-card-footer">
                             <div>
-                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">$9</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">20.000đ</div>
                                 <div style="font-size: 12px; color: var(--color-text-secondary);">520 kcal</div>
                             </div>
                             <button class="btn btn-sm btn-primary">Order</button>
@@ -535,7 +564,7 @@
 
                 <!-- Card 6 -->
                 <div class="masonry-card">
-                    <div class="masonry-card-image" style="aspect-ratio: 1;">
+                    <div class="masonry-card-image">
                         <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80" alt="Burger">
                     </div>
                     <div class="masonry-card-content">
@@ -543,7 +572,7 @@
                         <p class="masonry-card-description">Angus beef, cheddar, secret sauce</p>
                         <div class="masonry-card-footer">
                             <div>
-                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">$16</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--color-primary);">40.000đ</div>
                                 <div style="font-size: 12px; color: var(--color-text-secondary);">720 kcal</div>
                             </div>
                             <button class="btn btn-sm btn-primary">Order</button>
@@ -555,48 +584,16 @@
 
         <!-- Right Sidebar -->
         <aside class="sidebar-right">
-            <!-- Nutrition Tracker -->
-            <div class="widget">
-                <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 20px 0;">Daily Nutrition</h3>
-
-                <div class="nutrition-progress">
-                    <svg width="120" height="120">
-                        <circle cx="60" cy="60" r="54" fill="none" stroke="var(--color-surface)" stroke-width="8" />
-                        <circle cx="60" cy="60" r="54" fill="none" stroke="var(--color-primary)" stroke-width="8"
-                            stroke-dasharray="339.29" stroke-dashoffset="101.79" stroke-linecap="round" />
-                    </svg>
-                    <div class="nutrition-progress-text">
-                        <div style="font-size: 28px; font-weight: 700; color: var(--color-text-primary);">1,420</div>
-                        <div style="font-size: 12px; color: var(--color-text-secondary);">of 2,000 kcal</div>
-                    </div>
-                </div>
-
-                <div class="macros-grid">
-                    <div class="macro-item">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--color-text-primary);">82g</div>
-                        <div style="font-size: 11px; color: var(--color-text-secondary);">Protein</div>
-                    </div>
-                    <div class="macro-item">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--color-text-primary);">45g</div>
-                        <div style="font-size: 11px; color: var(--color-text-secondary);">Fat</div>
-                    </div>
-                    <div class="macro-item">
-                        <div style="font-size: 18px; font-weight: 700; color: var(--color-text-primary);">156g</div>
-                        <div style="font-size: 11px; color: var(--color-text-secondary);">Carbs</div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Map Widget -->
             <div class="widget">
                 <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 12px 0;">Nearby Restaurants</h3>
                 <div
-                    style="width: 100%; height: 200px; background: var(--color-surface); border-radius: 12px; overflow: hidden; position: relative;">
-                    <img src="https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/108.2022,16.0544,12,0/300x200@2x?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
-                        alt="Map" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
+                    style="width: 100%; height: 200px; background: var(--color-surface); border-radius: 12px; overflow: hidden; position: relative; cursor: pointer;">
+                    <img src="https://api.mapbox.com/styles/v1/mapbox/light-v10/static/108.2022,16.0544,13,0/340x200@2x?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+                        alt="Map" style="width: 100%; height: 100%; object-fit: cover;">
                     <div
-                        style="position: absolute; bottom: 12px; left: 12px; right: 12px; background: rgba(0, 0, 0, 0.8); padding: 8px 12px; border-radius: 8px; backdrop-filter: blur(8px);">
-                        <div style="font-size: 12px; font-weight: 600; color: white;">12 restaurants nearby</div>
+                        style="position: absolute; bottom: 12px; left: 12px; right: 12px; background: rgba(255, 255, 255, 0.95); padding: 10px 14px; border-radius: 8px; backdrop-filter: blur(8px); box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--color-text-primary);">12 restaurants nearby</div>
                     </div>
                 </div>
             </div>

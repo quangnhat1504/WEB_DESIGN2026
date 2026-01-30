@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -44,6 +44,7 @@
             top: 0;
             height: 100vh;
             overflow-y: auto;
+            order: 1;
         }
 
         @media (min-width: 1024px) {
@@ -57,6 +58,7 @@
             max-width: 720px;
             margin: 0 auto;
             padding: 32px 16px;
+            order: 2;
         }
 
         .sidebar-right {
@@ -71,6 +73,7 @@
             top: 0;
             height: 100vh;
             overflow-y: auto;
+            order: 3;
         }
 
         @media (min-width: 1280px) {
@@ -932,6 +935,20 @@
                         <button class="btn-icon" style="background: var(--color-primary); color: white;">
                             <span class="material-symbols-outlined" style="font-size: 16px;">add</span>
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Widget -->
+            <div class="widget">
+                <h3 style="font-size: 16px; font-weight: 700; margin: 0 0 12px 0;">Nearby Restaurants</h3>
+                <div
+                    style="width: 100%; height: 200px; background: var(--color-surface); border-radius: 12px; overflow: hidden; position: relative; cursor: pointer;">
+                    <img src="https://api.mapbox.com/styles/v1/mapbox/light-v10/static/108.2022,16.0544,13,0/340x200@2x?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw"
+                        alt="Map" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div
+                        style="position: absolute; bottom: 12px; left: 12px; right: 12px; background: rgba(255, 255, 255, 0.95); padding: 10px 14px; border-radius: 8px; backdrop-filter: blur(8px); box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);">
+                        <div style="font-size: 13px; font-weight: 600; color: var(--color-text-primary);">12 restaurants nearby</div>
                     </div>
                 </div>
             </div>

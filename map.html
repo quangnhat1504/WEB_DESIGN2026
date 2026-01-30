@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -30,10 +30,121 @@
             overflow: hidden;
         }
 
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar-left {
+            width: 280px;
+            background: var(--color-background);
+            border-right: 1px solid var(--color-border);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-primary), #ea580c);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(255, 105, 51, 0.2);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 105, 51, 0.1);
+            color: var(--color-text-primary);
+        }
+
+        .nav-link.active {
+            background: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 105, 51, 0.25);
+        }
+
+        .nav-link .material-symbols-outlined {
+            font-size: 24px;
+        }
+
+        .nav-link.active .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--color-surface-elevated);
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--color-surface);
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-icon:hover {
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+        }
+
         .map-container {
             position: relative;
             width: 100%;
             height: 100vh;
+            flex: 1;
         }
 
         #map {
@@ -45,16 +156,21 @@
         .map-overlay {
             position: absolute;
             top: 0;
-            left: 0;
-            width: 420px;
+            right: 0;
+            width: 340px;
             height: 100vh;
-            background: linear-gradient(135deg, rgba(40, 24, 20, 0.98), rgba(54, 31, 23, 0.95));
+            background: linear-gradient(135deg, rgba(255, 248, 243, 0.98), rgba(255, 255, 255, 0.95));
             backdrop-filter: blur(20px);
             z-index: 1000;
             display: flex;
             flex-direction: column;
-            border-right: 1px solid var(--color-border);
-            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+            border-left: 1px solid var(--color-border);
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .map-overlay.collapsed {
+            transform: translateX(340px);
         }
 
         .map-header {
@@ -70,7 +186,7 @@
         .search-input {
             width: 100%;
             padding: 14px 48px 14px 16px;
-            background: var(--color-surface-elevated);
+            background: #ffffff;
             border: 1px solid var(--color-border);
             border-radius: 12px;
             color: var(--color-text-primary);
@@ -106,7 +222,7 @@
 
         .filter-chip {
             padding: 8px 16px;
-            background: var(--color-surface-elevated);
+            background: #ffffff;
             border: 1px solid var(--color-border);
             border-radius: 20px;
             color: var(--color-text-secondary);
@@ -118,7 +234,8 @@
         }
 
         .filter-chip:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: #f9fafb;
+            border-color: var(--color-primary);
         }
 
         .filter-chip.active {
@@ -134,7 +251,7 @@
         }
 
         .restaurant-card {
-            background: linear-gradient(135deg, var(--color-surface-elevated), rgba(54, 31, 23, 0.8));
+            background: #ffffff;
             border: 1px solid var(--color-border);
             border-radius: 16px;
             padding: 16px;
@@ -143,6 +260,7 @@
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .restaurant-card::before {
@@ -219,10 +337,41 @@
             margin-top: 8px;
         }
 
-        .map-controls {
+        .toggle-sidebar-btn {
             position: absolute;
             top: 24px;
             right: 24px;
+            z-index: 1002;
+            width: 48px;
+            height: 48px;
+            background: var(--color-surface-elevated);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-sidebar-btn:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 12px rgba(255, 105, 51, 0.3);
+        }
+
+        .toggle-sidebar-btn.sidebar-open {
+            right: 364px;
+        }
+
+        .map-controls {
+            position: absolute;
+            top: 90px;
+            left: 24px;
             z-index: 1001;
             display: flex;
             flex-direction: column;
@@ -285,68 +434,109 @@
             color: var(--color-text-secondary);
         }
 
-        /* Custom Leaflet Popup */
+        /* Enhanced Popup Styling */
         .leaflet-popup-content-wrapper {
-            background: linear-gradient(135deg, var(--color-surface-elevated), rgba(54, 31, 23, 0.95));
-            border: 1px solid var(--color-border);
+            background: white;
             border-radius: 12px;
-            backdrop-filter: blur(10px);
+            padding: 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: none;
         }
 
         .leaflet-popup-content {
-            margin: 12px;
-            color: var(--color-text-primary);
-            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            font-family: Inter, sans-serif;
+        }
+
+        .custom-popup .leaflet-popup-content {
+            margin: 0;
+            padding: 0;
         }
 
         .leaflet-popup-tip {
-            background: var(--color-surface-elevated);
+            background: white;
         }
 
-        .popup-title {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 4px;
+        .custom-marker {
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        .popup-rating {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 12px;
-            color: var(--color-text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .map-overlay {
-                width: 100%;
-                height: 50vh;
-                top: auto;
-                bottom: 0;
-                border-right: none;
-                border-top: 1px solid var(--color-border);
-            }
-
-            .map-controls {
-                top: 12px;
-                right: 12px;
-            }
-
-            .heatmap-legend {
-                bottom: calc(50vh + 12px);
-                right: 12px;
-            }
+        .custom-marker:hover {
+            transform: scale(1.15);
         }
     </style>
 </head>
 
 <body>
-    <div class="map-container">
-        <!-- Map -->
-        <div id="map"></div>
+    <div class="app-layout">
+        <!-- Left Sidebar Navigation -->
+        <aside class="sidebar-left">
+            <div>
+                <!-- Logo -->
+                <div class="logo">
+                    <div class="logo-icon">F</div>
+                    <div>
+                        <h1 style="font-size: 18px; font-weight: 700; margin: 0;">FoodAI</h1>
+                        <span style="font-size: 12px; color: var(--color-text-secondary); font-weight: 500;">Premium</span>
+                    </div>
+                </div>
 
-        <!-- Left Overlay Panel -->
-        <aside class="map-overlay">
+                <!-- Navigation -->
+                <nav style="display: flex; flex-direction: column; gap: 8px;">
+                    <a href="social-feed.html" class="nav-link">
+                        <span class="material-symbols-outlined">home</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="discovery.html" class="nav-link">
+                        <span class="material-symbols-outlined">explore</span>
+                        <span>Explore</span>
+                    </a>
+                    <a href="map.html" class="nav-link active">
+                        <span class="material-symbols-outlined">map</span>
+                        <span>Map</span>
+                    </a>
+                    <a href="ai-nutritionist.html" class="nav-link">
+                        <span class="material-symbols-outlined">psychology</span>
+                        <span>AI Nutritionist</span>
+                    </a>
+                    <a href="orders.html" class="nav-link">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        <span>Orders</span>
+                    </a>
+                    <a href="saved.html" class="nav-link">
+                        <span class="material-symbols-outlined">favorite</span>
+                        <span>Saved</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- User Profile -->
+            <div class="user-profile">
+                <img src="https://i.pravatar.cc/80?img=5" alt="User" class="user-avatar">
+                <div style="flex: 1; min-width: 0;">
+                    <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Sarah Nguyen</div>
+                    <div style="font-size: 12px; color: var(--color-text-secondary);">Gold Member</div>
+                </div>
+                <button class="btn-icon">
+                    <span class="material-symbols-outlined" style="font-size: 20px;">more_vert</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Map Container -->
+        <div class="map-container">
+            <!-- Toggle Sidebar Button -->
+            <button class="toggle-sidebar-btn sidebar-open" onclick="toggleSidebar()">
+                <span class="material-symbols-outlined" id="toggleIcon">menu_open</span>
+            </button>
+
+            <!-- Map -->
+            <div id="map"></div>
+
+            <!-- Right Overlay Panel (Map Discovery) -->
+            <aside class="map-overlay" id="mapOverlay">
             <!-- Header with Search -->
             <div class="map-header">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
@@ -537,14 +727,14 @@
         // Initialize map centered on Da Nang
         const map = L.map('map').setView([16.047079, 108.206230], 13);
 
-        // Add tile layer with dark theme
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        // Add tile layer with light theme
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
             maxZoom: 19
         }).addTo(map);
 
-        // Custom marker icon
-        const customIcon = L.divIcon({
+        // Custom marker icon for food
+        const foodIcon = L.divIcon({
             className: 'custom-marker',
             html: `<div style="
                 width: 32px; 
@@ -565,29 +755,1114 @@
             iconAnchor: [16, 16]
         });
 
-        // Add restaurant markers
+        // Custom marker icon for drinks/beverages
+        const drinkIcon = L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="
+                width: 32px; 
+                height: 32px; 
+                background: linear-gradient(135deg, #8b5cf6, #7c3aed); 
+                border: 3px solid white; 
+                border-radius: 50%; 
+                box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-weight: bold;
+            ">
+                <span class="material-symbols-outlined" style="font-size: 16px; font-variation-settings: 'FILL' 1;">local_cafe</span>
+            </div>`,
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+        });
+
+        // Add restaurant markers with detailed data
         const restaurants = [
-            { name: "Phở Hà", lat: 16.047079, lng: 108.206230, rating: 4.8, category: "Vietnamese" },
-            { name: "Bánh Mì 24h", lat: 16.068000, lng: 108.221000, rating: 4.9, category: "Street Food" },
-            { name: "Healthy Bowl", lat: 16.060000, lng: 108.210000, rating: 4.7, category: "Healthy" },
-            { name: "Cà Phê Roastery", lat: 16.055000, lng: 108.225000, rating: 4.9, category: "Coffee" },
-            { name: "Bún Bò Huế", lat: 16.050000, lng: 108.215000, rating: 4.6, category: "Vietnamese" },
-            { name: "Mì Quảng", lat: 16.062000, lng: 108.218000, rating: 4.8, category: "Vietnamese" },
-            { name: "Com Tam", lat: 16.058000, lng: 108.208000, rating: 4.5, category: "Vietnamese" },
-            { name: "Pizza House", lat: 16.065000, lng: 108.212000, rating: 4.4, category: "Italian" },
+            { 
+                name: "Phở Hà", 
+                lat: 16.047079, 
+                lng: 108.206230, 
+                rating: 4.8, 
+                reviews: 2300,
+                category: "Vietnamese • Noodles",
+                image: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400&q=80",
+                checkins: 1234,
+                likes: 890
+            },
+            { 
+                name: "Bánh Mì 24h", 
+                lat: 16.068000, 
+                lng: 108.221000, 
+                rating: 4.9, 
+                reviews: 1800,
+                category: "Vietnamese • Street Food",
+                image: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=400&q=80",
+                checkins: 2156,
+                likes: 1450
+            },
+            { 
+                name: "Healthy Bowl", 
+                lat: 16.060000, 
+                lng: 108.210000, 
+                rating: 4.7, 
+                reviews: 890,
+                category: "Salads • Healthy • Vegan",
+                image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80",
+                checkins: 678,
+                likes: 542
+            },
+            { 
+                name: "Cà Phê Roastery", 
+                lat: 16.055000, 
+                lng: 108.225000, 
+                rating: 4.9, 
+                reviews: 3100,
+                category: "Coffee & Tea • Desserts",
+                image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80",
+                checkins: 3245,
+                likes: 2890
+            },
+            { 
+                name: "Bún Bò Huế", 
+                lat: 16.050000, 
+                lng: 108.215000, 
+                rating: 4.6, 
+                reviews: 1560,
+                category: "Vietnamese • Spicy",
+                image: "https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=400&q=80",
+                checkins: 987,
+                likes: 765
+            },
+            { 
+                name: "Mì Quảng", 
+                lat: 16.062000, 
+                lng: 108.218000, 
+                rating: 4.8, 
+                reviews: 2050,
+                category: "Vietnamese • Noodles",
+                image: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400&q=80",
+                checkins: 1432,
+                likes: 1123
+            },
+            { 
+                name: "Cơm Tấm", 
+                lat: 16.058000, 
+                lng: 108.208000, 
+                rating: 4.5, 
+                reviews: 1200,
+                category: "Vietnamese • Rice",
+                image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80",
+                checkins: 876,
+                likes: 654
+            },
+            { 
+                name: "Pizza House", 
+                lat: 16.065000, 
+                lng: 108.212000, 
+                rating: 4.4, 
+                reviews: 980,
+                category: "Italian • Pizza",
+                image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&q=80",
+                checkins: 543,
+                likes: 432
+            },
+            { 
+                name: "Trà Sữa Royaltea", 
+                lat: 16.056000, 
+                lng: 108.220000, 
+                rating: 4.7, 
+                reviews: 2400,
+                category: "Bubble Tea • Desserts",
+                image: "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=400&q=80",
+                checkins: 2890,
+                likes: 2340
+            },
+            { 
+                name: "Highland Coffee", 
+                lat: 16.070000, 
+                lng: 108.224000, 
+                rating: 4.5, 
+                reviews: 3500,
+                category: "Coffee & Tea • Cafe",
+                image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80",
+                checkins: 4200,
+                likes: 3100
+            },
+            { 
+                name: "Sinh Tố Nhiệt Đới", 
+                lat: 16.052000, 
+                lng: 108.212000, 
+                rating: 4.8, 
+                reviews: 1650,
+                category: "Smoothies • Juice • Healthy",
+                image: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=400&q=80",
+                checkins: 1543,
+                likes: 1289
+            },
+            { 
+                name: "Bánh Xèo Miền Trung", 
+                lat: 16.063000, 
+                lng: 108.207000, 
+                rating: 4.6, 
+                reviews: 1340,
+                category: "Vietnamese • Traditional",
+                image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&q=80",
+                checkins: 987,
+                likes: 756
+            },
+            { 
+                name: "Trà Chanh Phố Cổ", 
+                lat: 16.048000, 
+                lng: 108.219000, 
+                rating: 4.4, 
+                reviews: 890,
+                category: "Tea • Refreshment",
+                image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80",
+                checkins: 1234,
+                likes: 987
+            },
+            { 
+                name: "Cà Phê Sữa Đá", 
+                lat: 16.066000, 
+                lng: 108.216000, 
+                rating: 4.9, 
+                reviews: 2800,
+                category: "Vietnamese Coffee • Traditional",
+                image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80",
+                checkins: 3456,
+                likes: 2987
+            },
+            { 
+                name: "Bò Bía & Chè", 
+                lat: 16.054000, 
+                lng: 108.222000, 
+                rating: 4.5, 
+                reviews: 760,
+                category: "Desserts • Sweet Soup",
+                image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=80",
+                checkins: 654,
+                likes: 543
+            },
+            { 
+                name: "Gỏi Cuốn Tươi", 
+                lat: 16.061000, 
+                lng: 108.214000, 
+                rating: 4.7, 
+                reviews: 1450,
+                category: "Vietnamese • Fresh Rolls",
+                image: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400&q=80",
+                checkins: 1123,
+                likes: 897
+            },
+            { 
+                name: "Nước Mía Nguyên Chất", 
+                lat: 16.049000, 
+                lng: 108.223000, 
+                rating: 4.3, 
+                reviews: 520,
+                category: "Juice • Fresh • Natural",
+                image: "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80",
+                checkins: 876,
+                likes: 654
+            },
+            { 
+                name: "Cơm Niêu Sài Gòn", 
+                lat: 16.057000, 
+                lng: 108.217000, 
+                rating: 4.6, 
+                reviews: 1880,
+                category: "Vietnamese • Rice • Comfort Food",
+                image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80",
+                checkins: 1456,
+                likes: 1234
+            },
+            { 
+                name: "The Coffee House", 
+                lat: 16.071000, 
+                lng: 108.213000, 
+                rating: 4.6, 
+                reviews: 4200,
+                category: "Coffee • Modern Cafe",
+                image: "https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=400&q=80",
+                checkins: 5432,
+                likes: 4123
+            },
+            { 
+                name: "Bún Chả Hà Nội", 
+                lat: 16.051000, 
+                lng: 108.211000, 
+                rating: 4.8, 
+                reviews: 2100,
+                category: "Vietnamese • Grilled • Noodles",
+                image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80",
+                checkins: 1765,
+                likes: 1543
+            },
+            { 
+                name: "Trà Đào Cam Sả", 
+                lat: 16.069000, 
+                lng: 108.219000, 
+                rating: 4.5, 
+                reviews: 1320,
+                category: "Tea • Fruit Infusion",
+                image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&q=80",
+                checkins: 1987,
+                likes: 1654
+            },
+            { 
+                name: "Kem Xôi Dừa", 
+                lat: 16.064000, 
+                lng: 108.209000, 
+                rating: 4.4, 
+                reviews: 980,
+                category: "Desserts • Ice Cream • Traditional",
+                image: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400&q=80",
+                checkins: 876,
+                likes: 723
+            },
+            { 
+                name: "Hủ Tiếu Nam Vang", 
+                lat: 16.053000, 
+                lng: 108.226000, 
+                rating: 4.7, 
+                reviews: 1560,
+                category: "Vietnamese • Noodle Soup",
+                image: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80",
+                checkins: 1234,
+                likes: 987
+            },
+            { 
+                name: "Nước Ép Trái Cây Sạch", 
+                lat: 16.067000, 
+                lng: 108.222000, 
+                rating: 4.6, 
+                reviews: 1120,
+                category: "Juice Bar • Organic • Healthy",
+                image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80",
+                checkins: 1456,
+                likes: 1234
+            },
+            { 
+                name: "Bánh Cuốn Thanh Vân", 
+                lat: 16.059000, 
+                lng: 108.224000, 
+                rating: 4.8, 
+                reviews: 1890,
+                category: "Vietnamese • Breakfast • Steamed",
+                image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&q=80",
+                checkins: 1543,
+                likes: 1287
+            },
+            { 
+                name: "Cà Phê Vợt", 
+                lat: 16.072000, 
+                lng: 108.218000, 
+                rating: 4.9, 
+                reviews: 1780,
+                category: "Vietnamese Coffee • Traditional",
+                image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80",
+                checkins: 2345,
+                likes: 1987
+            },
+            { 
+                name: "Sữa Chua Nếp Cẩm", 
+                lat: 16.050500, 
+                lng: 108.213500, 
+                rating: 4.5, 
+                reviews: 890,
+                category: "Desserts • Yogurt • Healthy",
+                image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&q=80",
+                checkins: 987,
+                likes: 765
+            },
+            // Khu vực Hải Châu
+            { 
+                name: "Quán Ốc Đêm Hải Châu", 
+                lat: 16.045000, 
+                lng: 108.220000, 
+                rating: 4.6, 
+                reviews: 1560,
+                category: "Seafood • Vietnamese • Night Food",
+                image: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400&q=80",
+                checkins: 1432,
+                likes: 1189
+            },
+            { 
+                name: "Trà Sữa TocoToco", 
+                lat: 16.043000, 
+                lng: 108.218000, 
+                rating: 4.4, 
+                reviews: 2100,
+                category: "Bubble Tea • Desserts",
+                image: "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=400&q=80",
+                checkins: 2567,
+                likes: 2134
+            },
+            // Khu vực Sơn Trà
+            { 
+                name: "Hải Sản Bãi Bắc", 
+                lat: 16.100000, 
+                lng: 108.245000, 
+                rating: 4.8, 
+                reviews: 2890,
+                category: "Seafood • Fresh • Beachside",
+                image: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400&q=80",
+                checkins: 3456,
+                likes: 2987
+            },
+            { 
+                name: "Cà Phê View Biển", 
+                lat: 16.095000, 
+                lng: 108.240000, 
+                rating: 4.9, 
+                reviews: 3200,
+                category: "Coffee • Scenic View • Beach",
+                image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80",
+                checkins: 4123,
+                likes: 3654
+            },
+            // Khu vực Ngũ Hành Sơn
+            { 
+                name: "Mỳ Quảng Bà Mua", 
+                lat: 16.020000, 
+                lng: 108.260000, 
+                rating: 4.9, 
+                reviews: 3500,
+                category: "Vietnamese • Noodles • Traditional",
+                image: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400&q=80",
+                checkins: 4567,
+                likes: 3890
+            },
+            { 
+                name: "Sinh Tố Bơ Non Lạnh", 
+                lat: 16.025000, 
+                lng: 108.255000, 
+                rating: 4.7, 
+                reviews: 1780,
+                category: "Smoothies • Fresh Fruit • Healthy",
+                image: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=400&q=80",
+                checkins: 1987,
+                likes: 1654
+            },
+            // Khu vực Thanh Khê
+            { 
+                name: "Bún Đậu Mắm Tôm", 
+                lat: 16.065000, 
+                lng: 108.195000, 
+                rating: 4.5, 
+                reviews: 1340,
+                category: "Vietnamese • Traditional • Tofu",
+                image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&q=80",
+                checkins: 1234,
+                likes: 987
+            },
+            { 
+                name: "Cà Phê Cóc", 
+                lat: 16.070000, 
+                lng: 108.190000, 
+                rating: 4.6, 
+                reviews: 980,
+                category: "Vietnamese Coffee • Local Style",
+                image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80",
+                checkins: 1456,
+                likes: 1234
+            },
+            // Khu vực Cẩm Lệ
+            { 
+                name: "Bún Mắm Nêm", 
+                lat: 16.035000, 
+                lng: 108.190000, 
+                rating: 4.4, 
+                reviews: 890,
+                category: "Vietnamese • Noodles • Fermented",
+                image: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80",
+                checkins: 876,
+                likes: 654
+            },
+            { 
+                name: "Trà Atiso Đà Lạt", 
+                lat: 16.038000, 
+                lng: 108.185000, 
+                rating: 4.3, 
+                reviews: 560,
+                category: "Tea • Herbal • Healthy",
+                image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80",
+                checkins: 765,
+                likes: 543
+            },
+            // Khu vực Liên Chiểu
+            { 
+                name: "Cơm Gà Hải Nam", 
+                lat: 16.080000, 
+                lng: 108.150000, 
+                rating: 4.6, 
+                reviews: 1560,
+                category: "Vietnamese • Chicken Rice • Hainanese",
+                image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80",
+                checkins: 1543,
+                likes: 1287
+            },
+            { 
+                name: "Nước Mát Liên Chiểu", 
+                lat: 16.075000, 
+                lng: 108.145000, 
+                rating: 4.2, 
+                reviews: 430,
+                category: "Juice • Fresh • Natural",
+                image: "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80",
+                checkins: 654,
+                likes: 432
+            },
+            // Khu vực An Hải
+            { 
+                name: "Lẩu Thái Tomyum", 
+                lat: 16.055000, 
+                lng: 108.235000, 
+                rating: 4.7, 
+                reviews: 2100,
+                category: "Thai • Hot Pot • Spicy",
+                image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80",
+                checkins: 2345,
+                likes: 1987
+            },
+            { 
+                name: "Starbucks An Hải", 
+                lat: 16.060000, 
+                lng: 108.238000, 
+                rating: 4.5, 
+                reviews: 3890,
+                category: "Coffee • International • Chain",
+                image: "https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=400&q=80",
+                checkins: 5432,
+                likes: 4321
+            },
+            // Khu vực Phước Mỹ
+            { 
+                name: "Bò Tơ Tây Nguyên", 
+                lat: 16.032000, 
+                lng: 108.245000, 
+                rating: 4.8, 
+                reviews: 1890,
+                category: "Vietnamese • Beef • Highland",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80",
+                checkins: 1765,
+                likes: 1456
+            },
+            { 
+                name: "Trà Sữa Gongcha", 
+                lat: 16.028000, 
+                lng: 108.242000, 
+                rating: 4.6, 
+                reviews: 2340,
+                category: "Bubble Tea • Premium",
+                image: "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=400&q=80",
+                checkins: 2987,
+                likes: 2456
+            },
+            // Khu vực Hòa Khánh
+            { 
+                name: "Bánh Tráng Cuốn Thịt Heo", 
+                lat: 16.040000, 
+                lng: 108.165000, 
+                rating: 4.7, 
+                reviews: 1230,
+                category: "Vietnamese • Rice Paper Rolls",
+                image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&q=80",
+                checkins: 1123,
+                likes: 897
+            },
+            { 
+                name: "Nước Dừa Tươi", 
+                lat: 16.042000, 
+                lng: 108.170000, 
+                rating: 4.4, 
+                reviews: 670,
+                category: "Coconut Water • Fresh • Natural",
+                image: "https://images.unsplash.com/photo-1580870069867-74c57ee60d19?w=400&q=80",
+                checkins: 876,
+                likes: 654
+            },
+            // Khu vực Mân Thái
+            { 
+                name: "Chả Cá Lã Vọng", 
+                lat: 16.075000, 
+                lng: 108.230000, 
+                rating: 4.8, 
+                reviews: 1670,
+                category: "Vietnamese • Fish • Traditional",
+                image: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400&q=80",
+                checkins: 1543,
+                likes: 1234
+            },
+            { 
+                name: "Ding Tea Premium", 
+                lat: 16.078000, 
+                lng: 108.228000, 
+                rating: 4.5, 
+                reviews: 1980,
+                category: "Bubble Tea • Modern",
+                image: "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=400&q=80",
+                checkins: 2456,
+                likes: 1987
+            },
+            // Thêm 50 điểm mới rải rác
+            { 
+                name: "Bánh Mì Phượng", 
+                lat: 16.046500, 
+                lng: 108.210500, 
+                rating: 4.9, 
+                reviews: 4500,
+                category: "Vietnamese • Banh Mi • Famous",
+                image: "https://images.unsplash.com/photo-1598511726623-d2e9996892f0?w=400&q=80",
+                checkins: 5678,
+                likes: 4890
+            },
+            { 
+                name: "Cà Phê Muối", 
+                lat: 16.073000, 
+                lng: 108.243000, 
+                rating: 4.6, 
+                reviews: 2300,
+                category: "Coffee • Specialty • Unique",
+                image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80",
+                checkins: 2876,
+                likes: 2345
+            },
+            { 
+                name: "Nem Lụi Nướng", 
+                lat: 16.033000, 
+                lng: 108.203000, 
+                rating: 4.7, 
+                reviews: 1560,
+                category: "Vietnamese • Grilled • BBQ",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80",
+                checkins: 1432,
+                likes: 1198
+            },
+            { 
+                name: "Smoothie Bowl Café", 
+                lat: 16.092000, 
+                lng: 108.237000, 
+                rating: 4.8, 
+                reviews: 1890,
+                category: "Smoothies • Healthy Bowl • Acai",
+                image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&q=80",
+                checkins: 2134,
+                likes: 1876
+            },
+            { 
+                name: "Bún Riêu Cua", 
+                lat: 16.044000, 
+                lng: 108.227000, 
+                rating: 4.5, 
+                reviews: 1240,
+                category: "Vietnamese • Crab Noodle Soup",
+                image: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80",
+                checkins: 1345,
+                likes: 1087
+            },
+            { 
+                name: "Kombucha Station", 
+                lat: 16.061500, 
+                lng: 108.232000, 
+                rating: 4.4, 
+                reviews: 780,
+                category: "Tea • Kombucha • Probiotic",
+                image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&q=80",
+                checkins: 987,
+                likes: 765
+            },
+            { 
+                name: "Cơm Hến", 
+                lat: 16.068500, 
+                lng: 108.205000, 
+                rating: 4.6, 
+                reviews: 1670,
+                category: "Vietnamese • Mussel Rice • Hue Style",
+                image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80",
+                checkins: 1876,
+                likes: 1543
+            },
+            { 
+                name: "Matcha Latte House", 
+                lat: 16.085000, 
+                lng: 108.234000, 
+                rating: 4.7, 
+                reviews: 2100,
+                category: "Tea • Matcha • Japanese",
+                image: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=400&q=80",
+                checkins: 2567,
+                likes: 2134
+            },
+            { 
+                name: "Bánh Bèo Chén", 
+                lat: 16.037000, 
+                lng: 108.197000, 
+                rating: 4.5, 
+                reviews: 890,
+                category: "Vietnamese • Steamed Rice Cake",
+                image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&q=80",
+                checkins: 1023,
+                likes: 834
+            },
+            { 
+                name: "Fresh Orange Juice Bar", 
+                lat: 16.098000, 
+                lng: 108.248000, 
+                rating: 4.3, 
+                reviews: 560,
+                category: "Juice • Fresh Squeezed • Citrus",
+                image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80",
+                checkins: 745,
+                likes: 623
+            },
+            { 
+                name: "Lẩu Bò Nhúng Dấm", 
+                lat: 16.052500, 
+                lng: 108.198000, 
+                rating: 4.8, 
+                reviews: 2340,
+                category: "Vietnamese • Hot Pot • Beef",
+                image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80",
+                checkins: 2789,
+                likes: 2345
+            },
+            { 
+                name: "Coconut Coffee", 
+                lat: 16.027000, 
+                lng: 108.250000, 
+                rating: 4.6, 
+                reviews: 1450,
+                category: "Coffee • Coconut • Fusion",
+                image: "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&q=80",
+                checkins: 1678,
+                likes: 1432
+            },
+            { 
+                name: "Chè Hạt Lựu", 
+                lat: 16.041000, 
+                lng: 108.175000, 
+                rating: 4.4, 
+                reviews: 670,
+                category: "Desserts • Sweet Soup • Traditional",
+                image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&q=80",
+                checkins: 823,
+                likes: 678
+            },
+            { 
+                name: "Protein Shake Bar", 
+                lat: 16.083000, 
+                lng: 108.226000, 
+                rating: 4.5, 
+                reviews: 980,
+                category: "Smoothies • Protein • Fitness",
+                image: "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80",
+                checkins: 1234,
+                likes: 987
+            },
+            { 
+                name: "Cao Lầu Quán", 
+                lat: 16.048500, 
+                lng: 108.233000, 
+                rating: 4.7, 
+                reviews: 1780,
+                category: "Vietnamese • Noodles • Hoi An Style",
+                image: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400&q=80",
+                checkins: 1987,
+                likes: 1654
+            },
+            { 
+                name: "Artisan Coffee Lab", 
+                lat: 16.088000, 
+                lng: 108.215000, 
+                rating: 4.9, 
+                reviews: 2890,
+                category: "Coffee • Specialty • Pour Over",
+                image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&q=80",
+                checkins: 3456,
+                likes: 2987
+            },
+            { 
+                name: "Bánh Ướt Lòng Gà", 
+                lat: 16.034500, 
+                lng: 108.180000, 
+                rating: 4.6, 
+                reviews: 1120,
+                category: "Vietnamese • Rice Rolls • Chicken",
+                image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&q=80",
+                checkins: 1345,
+                likes: 1098
+            },
+            { 
+                name: "Detox Juice Corner", 
+                lat: 16.097000, 
+                lng: 108.252000, 
+                rating: 4.5, 
+                reviews: 890,
+                category: "Juice • Detox • Organic",
+                image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80",
+                checkins: 1087,
+                likes: 876
+            },
+            { 
+                name: "Bún Thịt Nướng", 
+                lat: 16.077000, 
+                lng: 108.200000, 
+                rating: 4.7, 
+                reviews: 2100,
+                category: "Vietnamese • Grilled Pork • Vermicelli",
+                image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80",
+                checkins: 2456,
+                likes: 2087
+            },
+            { 
+                name: "Milk Tea Avenue", 
+                lat: 16.039000, 
+                lng: 108.235000, 
+                rating: 4.4, 
+                reviews: 1670,
+                category: "Bubble Tea • Milk Tea • Taiwan Style",
+                image: "https://images.unsplash.com/photo-1525385133512-2f3bdd039054?w=400&q=80",
+                checkins: 2134,
+                likes: 1765
+            },
+            { 
+                name: "Gà Tần Hầm", 
+                lat: 16.064500, 
+                lng: 108.192000, 
+                rating: 4.8, 
+                reviews: 1450,
+                category: "Vietnamese • Chicken Soup • Herbal",
+                image: "https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=400&q=80",
+                checkins: 1654,
+                likes: 1345
+            },
+            { 
+                name: "Espresso Express", 
+                lat: 16.091000, 
+                lng: 108.220000, 
+                rating: 4.6, 
+                reviews: 1980,
+                category: "Coffee • Espresso • Quick Service",
+                image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80",
+                checkins: 2567,
+                likes: 2134
+            },
+            { 
+                name: "Bánh Canh Cua", 
+                lat: 16.029000, 
+                lng: 108.194000, 
+                rating: 4.5, 
+                reviews: 1340,
+                category: "Vietnamese • Thick Noodle • Crab",
+                image: "https://images.unsplash.com/photo-1617093727343-374698b1b08d?w=400&q=80",
+                checkins: 1543,
+                likes: 1234
+            },
+            { 
+                name: "Iced Tea Garden", 
+                lat: 16.101000, 
+                lng: 108.242000, 
+                rating: 4.3, 
+                reviews: 780,
+                category: "Tea • Iced Tea • Herbal",
+                image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80",
+                checkins: 967,
+                likes: 734
+            },
+            { 
+                name: "Bò Kho Quán", 
+                lat: 16.072500, 
+                lng: 108.187000, 
+                rating: 4.7, 
+                reviews: 1890,
+                category: "Vietnamese • Beef Stew • Comfort Food",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80",
+                checkins: 2145,
+                likes: 1876
+            },
+            { 
+                name: "Cold Brew Station", 
+                lat: 16.036000, 
+                lng: 108.240000, 
+                rating: 4.8, 
+                reviews: 2340,
+                category: "Coffee • Cold Brew • Nitro",
+                image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&q=80",
+                checkins: 2876,
+                likes: 2456
+            },
+            { 
+                name: "Mì Hoành Thánh", 
+                lat: 16.081000, 
+                lng: 108.178000, 
+                rating: 4.6, 
+                reviews: 1560,
+                category: "Vietnamese • Wonton Noodle • Cantonese",
+                image: "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=400&q=80",
+                checkins: 1765,
+                likes: 1432
+            },
+            { 
+                name: "Açaí Bowl Paradise", 
+                lat: 16.094000, 
+                lng: 108.246000, 
+                rating: 4.9, 
+                reviews: 1780,
+                category: "Smoothies • Açaí Bowl • Superfood",
+                image: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&q=80",
+                checkins: 2234,
+                likes: 1987
+            },
+            { 
+                name: "Xôi Gà Đậu Xanh", 
+                lat: 16.045500, 
+                lng: 108.182000, 
+                rating: 4.4, 
+                reviews: 890,
+                category: "Vietnamese • Sticky Rice • Breakfast",
+                image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=400&q=80",
+                checkins: 1087,
+                likes: 876
+            },
+            { 
+                name: "Thai Tea House", 
+                lat: 16.030000, 
+                lng: 108.258000, 
+                rating: 4.5, 
+                reviews: 1450,
+                category: "Tea • Thai Tea • Iced",
+                image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&q=80",
+                checkins: 1765,
+                likes: 1432
+            },
+            { 
+                name: "Bánh Khọt Vũng Tàu", 
+                lat: 16.087000, 
+                lng: 108.197000, 
+                rating: 4.7, 
+                reviews: 1230,
+                category: "Vietnamese • Mini Pancake • Southern",
+                image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&q=80",
+                checkins: 1456,
+                likes: 1198
+            },
+            { 
+                name: "Passion Fruit Juice", 
+                lat: 16.102000, 
+                lng: 108.255000, 
+                rating: 4.4, 
+                reviews: 670,
+                category: "Juice • Passion Fruit • Tropical",
+                image: "https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400&q=80",
+                checkins: 834,
+                likes: 678
+            },
+            { 
+                name: "Sườn Nướng BBQ", 
+                lat: 16.031000, 
+                lng: 108.172000, 
+                rating: 4.8, 
+                reviews: 2100,
+                category: "Vietnamese • Grilled Ribs • BBQ",
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80",
+                checkins: 2456,
+                likes: 2087
+            },
+            { 
+                name: "Oat Milk Latte Café", 
+                lat: 16.074000, 
+                lng: 108.247000, 
+                rating: 4.6, 
+                reviews: 1890,
+                category: "Coffee • Oat Milk • Vegan",
+                image: "https://images.unsplash.com/photo-1493857671505-72967e2e2760?w=400&q=80",
+                checkins: 2234,
+                likes: 1876
+            },
+            { 
+                name: "Cháo Lòng Sài Gòn", 
+                lat: 16.069000, 
+                lng: 108.184000, 
+                rating: 4.5, 
+                reviews: 1340,
+                category: "Vietnamese • Porridge • Offal",
+                image: "https://images.unsplash.com/photo-1569562211093-4ed0d0758f12?w=400&q=80",
+                checkins: 1543,
+                likes: 1287
+            },
+            { 
+                name: "Lemonade Stand", 
+                lat: 16.099000, 
+                lng: 108.239000, 
+                rating: 4.3, 
+                reviews: 450,
+                category: "Juice • Lemonade • Refreshing",
+                image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80",
+                checkins: 623,
+                likes: 512
+            },
+            { 
+                name: "Bò Bía Chay", 
+                lat: 16.043500, 
+                lng: 108.229000, 
+                rating: 4.4, 
+                reviews: 780,
+                category: "Vietnamese • Vegetarian Roll • Healthy",
+                image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&q=80",
+                checkins: 967,
+                likes: 765
+            },
+            { 
+                name: "Vietnamese Drip Coffee", 
+                lat: 16.084000, 
+                lng: 108.210000, 
+                rating: 4.9, 
+                reviews: 3100,
+                category: "Coffee • Vietnamese • Traditional Drip",
+                image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80",
+                checkins: 3789,
+                likes: 3234
+            },
+            { 
+                name: "Ram Bắp Rang Bơ", 
+                lat: 16.035500, 
+                lng: 108.163000, 
+                rating: 4.2, 
+                reviews: 560,
+                category: "Vietnamese • Fried Squid • Street Food",
+                image: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400&q=80",
+                checkins: 734,
+                likes: 612
+            },
+            { 
+                name: "Watermelon Smoothie Bar", 
+                lat: 16.103000, 
+                lng: 108.249000, 
+                rating: 4.5, 
+                reviews: 890,
+                category: "Smoothies • Watermelon • Fresh",
+                image: "https://images.unsplash.com/photo-1505252585461-04db1eb84625?w=400&q=80",
+                checkins: 1123,
+                likes: 934
+            },
+            { 
+                name: "Vịt Tiềm Thuốc Bắc", 
+                lat: 16.076000, 
+                lng: 108.173000, 
+                rating: 4.7, 
+                reviews: 1670,
+                category: "Vietnamese • Duck Soup • Herbal",
+                image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&q=80",
+                checkins: 1876,
+                likes: 1543
+            },
+            { 
+                name: "Rose Tea Lounge", 
+                lat: 16.038500, 
+                lng: 108.249000, 
+                rating: 4.6, 
+                reviews: 1450,
+                category: "Tea • Rose Tea • Floral",
+                image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&q=80",
+                checkins: 1678,
+                likes: 1398
+            },
+            { 
+                name: "Mực Một Nắng Nướng", 
+                lat: 16.089000, 
+                lng: 108.189000, 
+                rating: 4.8, 
+                reviews: 1890,
+                category: "Seafood • Grilled Squid • Specialty",
+                image: "https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400&q=80",
+                checkins: 2134,
+                likes: 1765
+            },
+            { 
+                name: "Mango Tango Juice", 
+                lat: 16.026000, 
+                lng: 108.263000, 
+                rating: 4.4, 
+                reviews: 1120,
+                category: "Juice • Mango • Tropical Fruit",
+                image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80",
+                checkins: 1345,
+                likes: 1087
+            },
+            { 
+                name: "Chả Giò Rế Quảng", 
+                lat: 16.066500, 
+                lng: 108.167000, 
+                rating: 4.5, 
+                reviews: 980,
+                category: "Vietnamese • Spring Roll • Fried",
+                image: "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&q=80",
+                checkins: 1234,
+                likes: 987
+            },
+            { 
+                name: "Lavender Honey Tea", 
+                lat: 16.096000, 
+                lng: 108.231000, 
+                rating: 4.7, 
+                reviews: 1230,
+                category: "Tea • Lavender • Honey • Relaxing",
+                image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80",
+                checkins: 1543,
+                likes: 1287
+            },
         ];
 
+        // Function to determine if it's a drink place
+        function isDrinkPlace(category) {
+            const drinkKeywords = ['Coffee', 'Tea', 'Bubble Tea', 'Smoothies', 'Juice', 'Café', 'Cafe', 'Trà', 'Cà Phê', 'Nước'];
+            return drinkKeywords.some(keyword => category.includes(keyword));
+        }
+
         restaurants.forEach(restaurant => {
-            const marker = L.marker([restaurant.lat, restaurant.lng], { icon: customIcon })
+            // Choose icon based on category
+            const markerIcon = isDrinkPlace(restaurant.category) ? drinkIcon : foodIcon;
+            
+            const marker = L.marker([restaurant.lat, restaurant.lng], { icon: markerIcon })
                 .addTo(map)
                 .bindPopup(`
-                    <div class="popup-title">${restaurant.name}</div>
-                    <div class="popup-rating">
-                        <span class="material-symbols-outlined" style="font-size: 14px; color: #eab308; font-variation-settings: 'FILL' 1;">star</span>
-                        <span>${restaurant.rating}</span>
-                        <span style="margin-left: 8px;">${restaurant.category}</span>
+                    <div style="width: 240px; font-family: Inter, sans-serif;">
+                        <img src="${restaurant.image}" 
+                             alt="${restaurant.name}" 
+                             style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px 8px 0 0; margin: -15px -15px 12px -15px;">
+                        <div style="padding: 0 4px;">
+                            <h3 style="margin: 0 0 4px 0; font-size: 16px; font-weight: 700; color: #2D1810;">${restaurant.name}</h3>
+                            <p style="margin: 0 0 8px 0; font-size: 12px; color: #8B5A3C;">${restaurant.category}</p>
+                            
+                            <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+                                <span style="color: #eab308; font-size: 14px;">⭐</span>
+                                <span style="font-size: 13px; font-weight: 600; color: #2D1810;">${restaurant.rating}</span>
+                                <span style="font-size: 12px; color: #8B5A3C;">(${restaurant.reviews.toLocaleString()})</span>
+                            </div>
+                            
+                            <div style="display: flex; gap: 12px; margin-bottom: 12px; font-size: 12px; color: #8B5A3C;">
+                                <div style="display: flex; align-items: center; gap: 4px;">
+                                    <span>📍</span>
+                                    <span>${restaurant.checkins.toLocaleString()}</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 4px;">
+                                    <span>❤️</span>
+                                    <span>${restaurant.likes.toLocaleString()}</span>
+                                </div>
+                            </div>
+                            
+                            <button onclick="viewDetails('${restaurant.name}')" 
+                                    style="width: 100%; padding: 8px; background: linear-gradient(135deg, #ff6933, #ea580c); color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; font-family: Inter, sans-serif;">
+                                View Details
+                            </button>
+                        </div>
                     </div>
-                `);
+                `, {
+                    maxWidth: 270,
+                    className: 'custom-popup'
+                });
         });
 
         // Heatmap data
@@ -641,11 +1916,35 @@
             map.setView([lat, lng], 16);
         }
 
+        function viewDetails(restaurantName) {
+            alert(`Viewing details for ${restaurantName}. This would open a detailed restaurant page.`);
+        }
+
+        function toggleSidebar() {
+            const overlay = document.getElementById('mapOverlay');
+            const toggleBtn = document.querySelector('.toggle-sidebar-btn');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            overlay.classList.toggle('collapsed');
+            toggleBtn.classList.toggle('sidebar-open');
+            
+            if (overlay.classList.contains('collapsed')) {
+                toggleIcon.textContent = 'menu';
+                toggleBtn.style.right = '24px';
+            } else {
+                toggleIcon.textContent = 'menu_open';
+                toggleBtn.style.right = '364px';
+            }
+        }
+
         // Add smooth animations
         map.on('zoomstart', function () {
             map.getContainer().style.transition = 'all 0.3s ease';
         });
     </script>
+
+    </div> <!-- end map-container -->
+    </div> <!-- end app-layout -->
 </body>
 
 </html>

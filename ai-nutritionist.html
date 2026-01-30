@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -162,6 +162,12 @@
             z-index: 100;
         }
 
+        @media (min-width: 1024px) {
+            .input-container {
+                left: 280px;
+            }
+        }
+
         .input-wrapper {
             max-width: 720px;
             margin: 0 auto;
@@ -302,6 +308,11 @@
                         style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; color: var(--color-text-secondary); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px;">
                         <span class="material-symbols-outlined" style="font-size: 24px;">explore</span>
                         <span>Explore</span>
+                    </a>
+                    <a href="map.html" class="nav-link"
+                        style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; color: var(--color-text-secondary); text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px;">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">map</span>
+                        <span>Map</span>
                     </a>
                     <a href="ai-nutritionist.html" class="nav-link active"
                         style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-radius: 12px; background: var(--color-primary); color: white; text-decoration: none; transition: all 0.2s; font-weight: 500; font-size: 14px; box-shadow: 0 4px 12px rgba(255, 105, 51, 0.25);">
