@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FoodAI - Dish Detail</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#ff6933",
+              "background-light": "#f8f6f5",
+              "background-dark": "#23140f",
+              "surface-dark": "#361f17",
+              "text-secondary": "#ce9e8d",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              "DEFAULT": "0.5rem", 
+              "lg": "1rem", 
+              "xl": "1.5rem", 
+              "full": "9999px"
+            },
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #23140f; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4b2c20; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff6933; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display selection:bg-primary selection:text-white">
+<!-- Top Navigation -->
+<div class="w-full border-b border-[#4b2c20] bg-background-dark/95 backdrop-blur sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 py-4">
+<header class="flex items-center justify-between whitespace-nowrap">
+<div class="flex items-center gap-8">
+<!-- Logo -->
+<a class="flex items-center gap-3 text-white hover:opacity-90 transition-opacity" href="#">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">FoodAI</h2>
+</a>
+<!-- Search Bar -->
+<div class="hidden md:flex flex-col min-w-64 h-11">
+<div class="flex w-full flex-1 items-center rounded-xl bg-surface-dark border border-[#4b2c20] focus-within:border-primary/50 transition-colors">
+<div class="text-text-secondary pl-4 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="w-full bg-transparent border-none text-white placeholder:text-text-secondary focus:ring-0 px-3 text-sm font-medium" placeholder="Search dishes, nutrition..."/>
+</div>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-6 lg:gap-8">
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-white hover:text-primary text-sm font-medium transition-colors" href="#">Discover</a>
+<a class="text-white hover:text-primary text-sm font-medium transition-colors" href="#">Nutrition</a>
+<a class="text-white hover:text-primary text-sm font-medium transition-colors" href="#">Delivery</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="relative flex items-center justify-center size-10 rounded-xl bg-surface-dark hover:bg-[#4b2c20] text-white transition-colors group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">shopping_bag</span>
+<span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold">2</span>
+</button>
+<button class="flex items-center justify-center size-10 rounded-xl bg-surface-dark hover:bg-[#4b2c20] text-white transition-colors group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">person</span>
+</button>
+</div>
+</div>
+</header>
+</div>
+</div>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-[1440px] mx-auto px-6 lg:px-12 py-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 h-full">
+<!-- Left Column: 3D Interactive Viewer -->
+<div class="lg:col-span-7 flex flex-col h-full min-h-[500px] lg:min-h-[calc(100vh-140px)] sticky top-24">
+<!-- Breadcrumbs (Mobile only, hidden on lg) -->
+<div class="flex lg:hidden flex-wrap gap-2 mb-4 text-sm">
+<a class="text-text-secondary hover:text-primary" href="#">Home</a>
+<span class="text-text-secondary">/</span>
+<a class="text-text-secondary hover:text-primary" href="#">Vietnamese</a>
+<span class="text-text-secondary">/</span>
+<span class="text-white">Mì Quảng Ếch</span>
+</div>
+<div class="relative w-full flex-1 bg-surface-dark rounded-2xl overflow-hidden shadow-2xl border border-white/5 group cursor-grab active:cursor-grabbing">
+<!-- Background / 3D Model Placeholder -->
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105" data-alt="Top down view of a bowl of Vietnamese turmeric noodles with frog meat and herbs" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDwdPsoGa-jyh_x_EL_UkrG9Yzy7k99DfvRm0VFNE5s0jaIVH0yZMslAiCjKZfiJ_fkV9i72Okpq9DhZbbtdHdD-HW9JXlf234l0lt3wGUqh5mJuRFetKiYmQDjMyJ6HGPNO64cXHycRr1081xQGayK-T6CrbsBuuimc8bLM1Ea9TbSVbWnST7oXhYpgbOgFNZJ65B07Wii_NHZZKi_1zn3BsosF9B3bDIt0yHmJwRJ0KNrC7tcczfTKdLLvCFkVruhUowEwCnFziA');">
+</div>
+<!-- Overlay Gradient -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent pointer-events-none"></div>
+<!-- AI Badge -->
+<div class="absolute top-6 left-6 z-10">
+<div class="flex items-center gap-2 bg-black/60 backdrop-blur-md border border-primary/40 px-3 py-1.5 rounded-lg shadow-lg">
+<span class="material-symbols-outlined text-primary text-[18px] animate-pulse">view_in_ar</span>
+<span class="text-white text-xs font-bold tracking-wide uppercase">AI 3D Realistic</span>
+</div>
+</div>
+<!-- Interactive Controls Overlay -->
+<div class="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between z-10 pointer-events-none">
+<div class="flex flex-col gap-1 pointer-events-auto">
+<p class="text-white font-bold text-lg drop-shadow-md">Interactive View</p>
+<p class="text-text-secondary text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">360</span>
+                                Click &amp; Drag to Rotate
+                            </p>
+</div>
+<div class="flex gap-2 pointer-events-auto">
+<button aria-label="Zoom Out" class="size-10 flex items-center justify-center bg-white/10 backdrop-blur hover:bg-white/20 rounded-full text-white transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button aria-label="Zoom In" class="size-10 flex items-center justify-center bg-white/10 backdrop-blur hover:bg-white/20 rounded-full text-white transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button aria-label="Expand" class="size-10 flex items-center justify-center bg-primary hover:bg-orange-600 rounded-full text-white shadow-lg transition-colors">
+<span class="material-symbols-outlined">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Product Details & AI Data -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Breadcrumbs (Desktop) -->
+<div class="hidden lg:flex flex-wrap gap-2 text-sm font-medium">
+<a class="text-text-secondary hover:text-primary transition-colors" href="#">Home</a>
+<span class="text-text-secondary">/</span>
+<a class="text-text-secondary hover:text-primary transition-colors" href="#">Vietnamese</a>
+<span class="text-text-secondary">/</span>
+<span class="text-white">Mì Quảng Ếch</span>
+</div>
+<!-- Header -->
+<div class="space-y-2 pb-4 border-b border-[#4b2c20]">
+<h1 class="text-3xl lg:text-4xl font-bold text-white leading-tight">Mì Quảng Ếch Da Nang Style</h1>
+<div class="flex items-center justify-between pt-2">
+<span class="text-2xl font-bold text-primary">85,000 VND</span>
+<div class="flex items-center gap-1 text-yellow-500 bg-yellow-500/10 px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-[18px] fill-current">star</span>
+<span class="text-sm font-bold">4.8</span>
+<span class="text-text-secondary text-xs font-normal ml-1">(124 reviews)</span>
+</div>
+</div>
+</div>
+<!-- Description -->
+<p class="text-text-secondary leading-relaxed">
+                    A traditional Central Vietnamese turmeric noodle dish served with savory braised frog, fresh banana blossom, roasted peanuts, and crispy rice crackers. Prepared with authentic AI-optimized recipe adjustments for maximum flavor profile.
+                </p>
+<!-- Nutrition Dashboard -->
+<div class="bg-surface-dark rounded-xl p-5 border border-white/5">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-white font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">nutrition</span>
+                            Nutrition Facts
+                        </h3>
+<span class="text-xs text-text-secondary bg-white/5 px-2 py-1 rounded">Per serving</span>
+</div>
+<div class="grid grid-cols-2 gap-x-6 gap-y-4">
+<!-- Calories -->
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="text-text-secondary">Calories</span>
+<span class="text-white font-bold">540 kcal</span>
+</div>
+<div class="h-1.5 w-full bg-[#23140f] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%] rounded-full"></div>
+</div>
+</div>
+<!-- Protein -->
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="text-text-secondary">Protein</span>
+<span class="text-white font-bold">32g</span>
+</div>
+<div class="h-1.5 w-full bg-[#23140f] rounded-full overflow-hidden">
+<div class="h-full bg-green-500 w-[80%] rounded-full"></div>
+</div>
+</div>
+<!-- Carbs -->
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="text-text-secondary">Carbs</span>
+<span class="text-white font-bold">45g</span>
+</div>
+<div class="h-1.5 w-full bg-[#23140f] rounded-full overflow-hidden">
+<div class="h-full bg-yellow-500 w-[50%] rounded-full"></div>
+</div>
+</div>
+<!-- Fat -->
+<div>
+<div class="flex justify-between text-sm mb-1">
+<span class="text-text-secondary">Fat</span>
+<span class="text-white font-bold">12g</span>
+</div>
+<div class="h-1.5 w-full bg-[#23140f] rounded-full overflow-hidden">
+<div class="h-full bg-red-400 w-[30%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Insights Card -->
+<div class="relative overflow-hidden bg-gradient-to-br from-[#2a1b15] to-[#361f17] rounded-xl p-5 border border-primary/20">
+<div class="absolute top-0 right-0 p-3 opacity-10">
+<span class="material-symbols-outlined text-6xl text-primary">auto_awesome</span>
+</div>
+<div class="flex items-start gap-3 relative z-10">
+<div class="p-2 bg-primary/20 rounded-lg text-primary shrink-0">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div>
+<h3 class="text-white font-bold text-sm mb-1">AI Dietary Insight</h3>
+<p class="text-text-secondary text-sm leading-relaxed">
+<span class="text-white font-medium">Gym Friendly &amp; High Protein.</span> 
+                                The frog meat provides lean protein essential for muscle recovery, while turmeric offers natural anti-inflammatory benefits post-workout.
+                            </p>
+</div>
+</div>
+<!-- Tags -->
+<div class="flex gap-2 mt-4 relative z-10">
+<span class="text-[10px] font-bold uppercase tracking-wider text-green-400 bg-green-400/10 px-2 py-1 rounded">High Protein</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-400/10 px-2 py-1 rounded">Low Sugar</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-orange-400 bg-orange-400/10 px-2 py-1 rounded">Spicy Lvl 2</span>
+</div>
+</div>
+<!-- AI Reviews Summary -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<h3 class="text-white font-bold text-sm">AI Review Summary</h3>
+<span class="text-xs text-primary font-medium cursor-pointer hover:underline">View all 124 reviews</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="bg-surface-dark p-3 rounded-lg border border-white/5 flex gap-3">
+<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
+<p class="text-sm text-text-secondary">"92% of users praised the depth of the <span class="text-white font-medium">broth flavor</span>."</p>
+</div>
+<div class="bg-surface-dark p-3 rounded-lg border border-white/5 flex gap-3">
+<span class="material-symbols-outlined text-green-500 text-sm mt-0.5">check_circle</span>
+<p class="text-sm text-text-secondary">"Users noted the <span class="text-white font-medium">portion size</span> is perfect for lunch."</p>
+</div>
+</div>
+</div>
+<!-- Add to Cart Action Area -->
+<div class="mt-auto pt-6 sticky bottom-0 bg-background-dark/95 backdrop-blur py-4 border-t border-[#4b2c20]">
+<div class="flex gap-4">
+<!-- Quantity -->
+<div class="flex items-center bg-surface-dark rounded-xl h-12 px-2 border border-[#4b2c20]">
+<button class="w-10 h-full flex items-center justify-center text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center text-white font-bold">1</span>
+<button class="w-10 h-full flex items-center justify-center text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<!-- Add Button -->
+<button class="flex-1 bg-primary hover:bg-orange-600 text-white font-bold text-base rounded-xl h-12 shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span>Add to Cart</span>
+<span class="bg-white/20 px-2 py-0.5 rounded text-xs">85k</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

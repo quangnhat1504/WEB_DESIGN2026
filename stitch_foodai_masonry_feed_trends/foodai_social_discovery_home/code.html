@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FoodAI Social Discovery Home</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff6933",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                        "card-dark": "#361f17",
+                        "border-dark": "#4b2c20",
+                        "text-secondary": "#ce9e8d",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                    boxShadow: {
+                        'glow': '0 0 15px rgba(255, 105, 51, 0.4)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Hide scrollbar for cleaner UI in side panels */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white overflow-x-hidden min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-solid border-border-dark bg-background-dark/95 backdrop-blur-md px-6 py-3 lg:px-10">
+<div class="flex items-center gap-8 flex-1">
+<!-- Logo -->
+<div class="flex items-center gap-3 text-white">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined text-xl">restaurant</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">FoodAI</h2>
+</div>
+<!-- Global Search -->
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-96 w-full group">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-[#4b2c20]/50 border border-transparent group-focus-within:border-primary/50 transition-all">
+<div class="text-[#ce9e8d] flex items-center justify-center pl-4 pr-2">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-xl text-white focus:outline-0 bg-transparent placeholder:text-[#ce9e8d] text-sm font-normal leading-normal" placeholder="Search for 'Bún chả'..."/>
+</div>
+</label>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center justify-end gap-6">
+<div class="hidden lg:flex items-center gap-6">
+<a class="text-[#ce9e8d] hover:text-white text-sm font-medium transition-colors" href="#">Customer Mode</a>
+<div class="relative cursor-pointer">
+<span class="material-symbols-outlined text-[#ce9e8d] hover:text-white transition-colors">notifications</span>
+<span class="absolute top-0 right-0 size-2 bg-primary rounded-full"></span>
+</div>
+</div>
+<!-- Role Switcher -->
+<button class="flex items-center gap-2 cursor-pointer overflow-hidden rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-glow hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-[18px]">cached</span>
+<span class="truncate hidden sm:inline">Switch Role</span>
+</button>
+<!-- Profile -->
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-border-dark cursor-pointer" data-alt="User profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfpOd6h5scDm4iJFexXyGY-jOuEVb0lLe3PBIKHjLd9BxqjBvnbt9Jm_rARC7Huwovhc6BbTFEl8sPIk2DvkHZEyvXyqiiJx_KgzH8w3gba9yjVJrCsPaOScufLkPzooGQ6NK0f6EBB4YFFjRECxa5oofs9JtAa4gTzvllIMF3hFNjG_UmBFM1SDHy3Ku-fUeaGdmhsjfWC1XOpIKi4W_XeZMrynaoZbcCdnjbHnzazgffUU6rYBcODN-YfStPc5PyzJzR8hTKWOU');"></div>
+</div>
+</header>
+<!-- Main Layout Container -->
+<div class="layout-container flex grow justify-center w-full max-w-[1440px] mx-auto pt-6 px-4 lg:px-8 gap-8">
+<!-- Left Sidebar (Sticky) -->
+<aside class="hidden lg:flex w-64 flex-col sticky top-[5.5rem] h-[calc(100vh-6rem)]">
+<div class="flex flex-col gap-1">
+<div class="flex flex-col mb-6 px-4">
+<p class="text-white text-base font-bold">FoodAI Discovery</p>
+<div class="flex items-center gap-1 mt-1 text-[#ce9e8d]">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<p class="text-sm">Da Nang, Vietnam</p>
+</div>
+</div>
+<!-- Navigation Items -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl bg-primary/20 text-primary transition-all" href="#">
+<span class="material-symbols-outlined fill">home</span>
+<span class="text-sm font-bold">Home</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-[#361f17] text-[#ce9e8d] hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">explore</span>
+<span class="text-sm font-medium">Explore</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-[#361f17] text-[#ce9e8d] hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">movie</span>
+<span class="text-sm font-medium">Reels</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-[#361f17] text-[#ce9e8d] hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">map</span>
+<span class="text-sm font-medium">Map</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-[#361f17] text-[#ce9e8d] hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">shopping_cart</span>
+<span class="text-sm font-medium">Cart</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-xl hover:bg-[#361f17] text-[#ce9e8d] hover:text-white transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">person</span>
+<span class="text-sm font-medium">Profile</span>
+</a>
+</nav>
+</div>
+<!-- Mini Promo Area -->
+<div class="mt-auto mb-6 p-4 rounded-xl bg-gradient-to-br from-primary/20 to-purple-600/20 border border-primary/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-xl">auto_awesome</span>
+<span class="text-white font-bold text-sm">AI Daily Tip</span>
+</div>
+<p class="text-[#ce9e8d] text-xs leading-relaxed">Try adding more leafy greens to your Mì Quảng for better fiber intake today!</p>
+</div>
+</aside>
+<!-- Center Feed -->
+<main class="flex flex-col flex-1 max-w-[640px] pb-20">
+<!-- Stories / Highlights Bar -->
+<div class="flex gap-4 overflow-x-auto pb-6 no-scrollbar mb-2">
+<div class="flex flex-col items-center gap-2 min-w-[70px] cursor-pointer group">
+<div class="size-[70px] rounded-full p-[2px] bg-gradient-to-tr from-primary to-yellow-400 group-hover:scale-105 transition-transform">
+<div class="size-full rounded-full border-2 border-background-dark bg-cover bg-center" data-alt="User story thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsA736TZqSr9NX7lyD-dm0RtNHIPP6pNrdErniR5t4CfCB92VAY2HXMCkAROpxjhJ1ydeqagZ7tEc2KYrrzla_XtmhT3rvEkm_KXo1KUqNCG6wljlfmtUK2FyQehCubFCuSwWqSSDkK7v08HO8LN7KaYSa_I59A1ACxtRD7SBOsRbBQ53umTGUEst_lLQB3w0-OSGjuzkj7zpjw1V3TrckbvCaC6qdN7HmmSUKkwNdix7miGgP6nHGmGHte1QyQcaJDikDpNdKaGU');"></div>
+</div>
+<span class="text-xs text-white truncate w-16 text-center">Your Story</span>
+</div>
+<!-- Story Items -->
+<div class="flex flex-col items-center gap-2 min-w-[70px] cursor-pointer group">
+<div class="size-[70px] rounded-full p-[2px] bg-gradient-to-tr from-gray-600 to-gray-500 hover:from-primary hover:to-yellow-400 transition-colors">
+<div class="size-full rounded-full border-2 border-background-dark bg-cover bg-center" data-alt="Pizza restaurant story thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC2meNi5xzR8w9GYPG0dEGK8JrjzUTw5uBpDP1iEKPue4v5X_OizI01mqSr-iP3foj-2GlTkTVS7IwM2N_gNgzBpjDT0S7GVacrvs0K26iWim_JUJqTO-27onYmzJHNXgFFMt1jRFQFLZwg6ilpRifSDlVgseqjCo_4teCyYewtLQetFNeWIi3B7E6lPzE_VjsJZNLzM2jmjxgdKCcpieXr-lkBFXGUK2ugvFjUvxMECMZtH1QNY5xr-k7e5cyTgxhBmTzXirIwj-w');"></div>
+</div>
+<span class="text-xs text-[#ce9e8d] truncate w-16 text-center">Pizza 4P's</span>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[70px] cursor-pointer group">
+<div class="size-[70px] rounded-full p-[2px] bg-gradient-to-tr from-gray-600 to-gray-500 hover:from-primary hover:to-yellow-400 transition-colors">
+<div class="size-full rounded-full border-2 border-background-dark bg-cover bg-center" data-alt="Pancakes story thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_RkZfKLHAp_bX85kh7c-DCL1EMYw39Y59o_h61fbWJsw2G21gill5vMtCZznnlJIVgFQAjnK2pHBvUYQLe3Axn1Kuq8cUEBYe7UXnaC_DfnX2NZ93b2m-hiGwNvVCgwPKrMI1KIlrGYzg3RW8ycoxb26A8CLJm7L8zfr-Ze_yIezbxkzkiXyUZba0Pv4ZNn2dMm_GIctScy7V5Ni-QHNajj5Ksl7n8EHys3zMKfqCvvBjREFfzAlCcuiW7-Y4gHlFJVjXH2WrOZc');"></div>
+</div>
+<span class="text-xs text-[#ce9e8d] truncate w-16 text-center">Madam Lan</span>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[70px] cursor-pointer group">
+<div class="size-[70px] rounded-full p-[2px] bg-gradient-to-tr from-gray-600 to-gray-500 hover:from-primary hover:to-yellow-400 transition-colors">
+<div class="size-full rounded-full border-2 border-background-dark bg-cover bg-center" data-alt="Salad story thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAtPvzWf3IL2-fsN8f7IAMziv7-40zcdBHfNrX8fVSsh8yGvHb3WghM6xrIpBSnAVOIB17-JFLrBwellZCq_Ro8ipC9S-lNShwk_ztyNtr0VWF0GAzOzqf422W-o7GRRqKnvdo-Iv31QVkrzdkOl83EtOj8YiLHw2CXWy6Rq6YpSlg0oyRa07s_VnOfGsZf5jxokoVvCC4tpnG0uMtbJANSphVmtd3jYkBBVwuMGchjTHoaKOL4CQYJdCDNGLElC-4J0_DL1sz7qOs');"></div>
+</div>
+<span class="text-xs text-[#ce9e8d] truncate w-16 text-center">Healthy..</span>
+</div>
+</div>
+<!-- Feed Title -->
+<div class="flex items-center justify-between mb-4 px-2">
+<h1 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Your Feed</h1>
+<div class="flex gap-2">
+<button class="text-xs font-medium bg-primary text-white px-3 py-1 rounded-full">For You</button>
+<button class="text-xs font-medium text-[#ce9e8d] hover:text-white px-3 py-1 rounded-full transition-colors">Following</button>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Post 1: Mì Quảng -->
+<article class="flex flex-col rounded-2xl bg-card-dark shadow-sm overflow-hidden">
+<!-- Post Header -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center" data-alt="Restaurant avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_nwJkUUpL_QYF67XI8K89IfDW6mEW-x7vdxPhRothA5-943U7bK3cUuLME1jCUtYq6vlzBuA73MRkxb4TTnU5RcaYdM8_ABUm1EAmPYpTtPbTiYGWIhyFL6Pj71k8UYBku73pDpcLjGBUSGwDYqmuD7mMcrxnwpRJfPwfuTA2TooAax_9cit5yOXulBCDLTmBNEgfBdKSsc9UKymdNb78fa7Z0sDozHCtVKTCtEU6Z3rR9FAddtIKtTauVonAsRxFMGrYxN0bhg4');"></div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<h3 class="text-white text-sm font-bold">Bếp Trang • Mì Quảng Ếch</h3>
+<span class="material-symbols-outlined text-blue-400 text-[14px] fill">verified</span>
+</div>
+<p class="text-[#ce9e8d] text-xs">Da Nang • 2 hours ago</p>
+</div>
+</div>
+<button class="text-[#ce9e8d] hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<!-- Post Image -->
+<div class="relative w-full aspect-[4/3] bg-gray-800 group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Bowl of Mi Quang noodles with fresh herbs and turmeric broth" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_dPz37smqJQQZuYl135OP5Hy9c-WT8khNkgluX82Zg7Br0diAf5TevOjuxCbbsU9xVwp2r-oaeLz7UuIoVstz-7p30vCQxwk_25IQEPmSDSOksGuRxs2qVelM_FqeF4RlRNBCN-e8zUE3vs7RMclhiH2Ro3R6P1OLSETS42Is6qAvzy_jAt90i-xRvXeYbtxI5i-A8EG9J5aHjHErMTYkIyChz6uSdnwJkMzSEhAP5IXnsbs07nS1__po9Nb-sEdcSgR2QaeODzU');"></div>
+<!-- AI Badge Overlay -->
+<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 rounded-full pl-2 pr-4 py-1.5 flex items-center gap-2 shadow-lg">
+<div class="bg-gradient-to-br from-green-400 to-blue-500 rounded-full p-1 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[14px]">auto_awesome</span>
+</div>
+<div class="flex flex-col leading-none">
+<span class="text-white text-[10px] uppercase font-bold tracking-wider opacity-70">AI Analysis</span>
+<span class="text-white text-xs font-bold">450 kcal • High Protein</span>
+</div>
+</div>
+<!-- Tag -->
+<div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white text-xs px-3 py-1 rounded-lg flex items-center gap-1 cursor-pointer hover:bg-black/80 transition-colors">
+<span class="material-symbols-outlined text-[14px]">restaurant_menu</span>
+                            View Menu
+                        </div>
+</div>
+<!-- Post Actions -->
+<div class="p-4 pt-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-4">
+<button class="group flex items-center gap-1.5">
+<span class="material-symbols-outlined text-white group-hover:text-red-500 transition-colors text-[26px]">favorite</span>
+<span class="text-white text-sm font-medium">1.2k</span>
+</button>
+<button class="group flex items-center gap-1.5">
+<span class="material-symbols-outlined text-white group-hover:text-blue-400 transition-colors text-[26px]">chat_bubble</span>
+<span class="text-white text-sm font-medium">45</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-white group-hover:text-green-400 transition-colors text-[26px]">send</span>
+</button>
+</div>
+<button class="group">
+<span class="material-symbols-outlined text-white group-hover:text-yellow-400 transition-colors text-[26px]">bookmark</span>
+</button>
+</div>
+<!-- Caption & Order -->
+<div class="flex flex-col gap-3">
+<div>
+<p class="text-white text-sm leading-relaxed">
+<span class="font-bold mr-1">Bếp Trang</span>
+                                    Fresh catch of the day! Try our special Mì Quảng Ếch with turmeric noodles and fresh herbs from Tra Que village. 🐸🌿 #DaNangFood #MiQuang
+                                </p>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-[#2a1711] border border-[#4b2c20]/50">
+<div class="flex flex-col">
+<span class="text-white text-sm font-bold">Mì Quảng Ếch Đặc Biệt</span>
+<span class="text-[#ce9e8d] text-xs">Best seller today • 15 mins</span>
+</div>
+<button class="flex items-center gap-1 bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">
+                                    Order • 45,000đ
+                                </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Post 2: Bánh Xèo -->
+<article class="flex flex-col rounded-2xl bg-card-dark shadow-sm overflow-hidden">
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center" data-alt="Restaurant avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB_plqNMa8cF0upZex1TxkRqZE35-mCAvNsxvoSlnKsBP_I1XOpgQKgFZuIAqizZzM9jexPcYDQwTMjH1L5R19hzlZnEXYqC0EpuPV8I6R9Bx4VsE2DAS-mNPFoUhWVTcNg1N2S4jH56ULqVtEg_7yG6GPlTxga62m0HnOHrRjZjSkdPjsyrlIjLaaVNC_mBZptxucPE3WqNezezUNOzrgNq08Vzm0g--oqSyEnQr9pJeV_-7sZkyP84pm0GisVeGp0azUmZGMcKHk');"></div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<h3 class="text-white text-sm font-bold">Bà Dưỡng • Bánh Xèo</h3>
+<span class="material-symbols-outlined text-blue-400 text-[14px] fill">verified</span>
+</div>
+<p class="text-[#ce9e8d] text-xs">Hai Chau, Da Nang • 45 mins ago</p>
+</div>
+</div>
+<button class="text-[#ce9e8d] hover:text-white">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="relative w-full aspect-[4/3] bg-gray-800 group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Crispy Vietnamese sizzling pancakes Banh Xeo with fresh greens" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDk4oXaEVi21TDwtEQ0Q3jtZUAwlqRNPP2CuktTXQv6EfZia6oTocLY9X7P11jvg6shk6uxY4F9o70oGMkWWexZGLkKMtIWor6Muo4p7kHWpznlT_kgzk0ytkS-JPN55g8QJFah2EtRpCkKctLD-mktVgVzuSn6YLe1SThGAGAg1PJ64RA_8d1abZ8MIFoK9RoQA0zDSimap0JInT_GmIdO7aynRv8EwhRYIbIq6SBeKxzNR7p68OaFCG0-GRrBe2RDCrIQXss3TSY');"></div>
+<!-- AI Badge Overlay -->
+<div class="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 rounded-full pl-2 pr-4 py-1.5 flex items-center gap-2 shadow-lg">
+<div class="bg-gradient-to-br from-orange-400 to-red-500 rounded-full p-1 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[14px]">local_fire_department</span>
+</div>
+<div class="flex flex-col leading-none">
+<span class="text-white text-[10px] uppercase font-bold tracking-wider opacity-70">AI Analysis</span>
+<span class="text-white text-xs font-bold">620 kcal • Indulgence</span>
+</div>
+</div>
+</div>
+<div class="p-4 pt-3">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-4">
+<button class="group flex items-center gap-1.5">
+<span class="material-symbols-outlined text-white group-hover:text-red-500 transition-colors text-[26px]">favorite_border</span>
+<span class="text-white text-sm font-medium">856</span>
+</button>
+<button class="group flex items-center gap-1.5">
+<span class="material-symbols-outlined text-white group-hover:text-blue-400 transition-colors text-[26px]">chat_bubble</span>
+<span class="text-white text-sm font-medium">120</span>
+</button>
+<button class="group">
+<span class="material-symbols-outlined text-white group-hover:text-green-400 transition-colors text-[26px]">send</span>
+</button>
+</div>
+<button class="group">
+<span class="material-symbols-outlined text-white group-hover:text-yellow-400 transition-colors text-[26px]">bookmark_border</span>
+</button>
+</div>
+<div class="flex flex-col gap-3">
+<div>
+<p class="text-white text-sm leading-relaxed">
+<span class="font-bold mr-1">Bà Dưỡng</span>
+                                    The crispest Bánh Xèo in town! Served with our famous peanut sauce. Perfect for a rainy afternoon. 🌧️🥞
+                                </p>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-[#2a1711] border border-[#4b2c20]/50">
+<div class="flex flex-col">
+<span class="text-white text-sm font-bold">Combo Bánh Xèo (4 pcs)</span>
+<span class="text-[#ce9e8d] text-xs">Trending • 25 mins</span>
+</div>
+<button class="flex items-center gap-1 bg-primary hover:bg-primary/90 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">
+                                    Order • 60,000đ
+                                </button>
+</div>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- Right Panel (Discovery) -->
+<aside class="hidden xl:flex w-80 flex-col sticky top-[5.5rem] h-[calc(100vh-6rem)] gap-6 overflow-y-auto no-scrollbar">
+<!-- AI Recommendations -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-1">
+<h3 class="text-white text-lg font-bold">AI For You</h3>
+<a class="text-primary text-xs font-bold hover:underline" href="#">See All</a>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Rec Item 1 -->
+<div class="flex items-center gap-3 p-3 rounded-xl bg-card-dark hover:bg-[#42261d] transition-colors cursor-pointer group">
+<div class="size-16 rounded-lg bg-cover bg-center shrink-0" data-alt="Bun Bo Hue spicy beef noodle soup" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBmNA6qy2IiYVBspEA8aZFs0g7HTkDHyL3c-4ffKj33jsq-5bk-PXP09AFy0CWRDXo0pP_nTxkgpBJzA1FnTAxVdjTqfd2y_x6gcsTFwOZWaKHBMaFxIwnw0J8wbwM3v69fzKeM9mPx1DXtmbyHdl1M5oOlcFgUboo4IoFHuMwpOBvTUsChZy7NegnkR7KmIYkrpkS-Bi2CM0QWcxj0ySjleAEONXwMuHUHRj5dD9pe43jW6TgZlgXE0yRwkq1NxKlXGdDBB0QMG64');"></div>
+<div class="flex flex-col flex-1 min-w-0">
+<h4 class="text-white text-sm font-bold truncate group-hover:text-primary transition-colors">Bún Bò Huế</h4>
+<div class="flex items-center gap-1 mb-1">
+<span class="bg-green-500/20 text-green-400 text-[10px] font-bold px-1.5 py-0.5 rounded">95% Match</span>
+</div>
+<p class="text-[#ce9e8d] text-xs truncate">Based on your spicy food history</p>
+</div>
+<button class="size-8 rounded-full bg-background-dark flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<!-- Rec Item 2 -->
+<div class="flex items-center gap-3 p-3 rounded-xl bg-card-dark hover:bg-[#42261d] transition-colors cursor-pointer group">
+<div class="size-16 rounded-lg bg-cover bg-center shrink-0" data-alt="Cao Lau noodles" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBc_KG62xOPdTNgQ4B0Itxaa663A7E8dgYi1rtuh3dBhXCisHVmbPIgHg1ZZxwIa9hS4j-R3m1rPC8RFfYRDDaMyp1IXceJpAyjAfgCKnbS1kfPeXRoo8XC2omPIHinOB6DbR1vvRFAJYXkfALWNd_sAL26FfkkSKFIJYccw5Td6lo4WVJXNXZtOMgqtal7C7-maK5Lhrl8e-UH7Kdf4oUH75h3Awz9lmwd_m8JnUvG73TBlxIckgGXTGn0pml0XaXz9liCiok6jA8');"></div>
+<div class="flex flex-col flex-1 min-w-0">
+<h4 class="text-white text-sm font-bold truncate group-hover:text-primary transition-colors">Cao Lầu Hội An</h4>
+<div class="flex items-center gap-1 mb-1">
+<span class="bg-blue-500/20 text-blue-400 text-[10px] font-bold px-1.5 py-0.5 rounded">88% Match</span>
+</div>
+<p class="text-[#ce9e8d] text-xs truncate">Popular with users like you</p>
+</div>
+<button class="size-8 rounded-full bg-background-dark flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Trending Section -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-1">
+<h3 class="text-white text-lg font-bold">Trending in Da Nang</h3>
+<span class="material-symbols-outlined text-[#ce9e8d]">trending_up</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-card-dark text-[#ce9e8d] text-sm font-medium hover:text-white hover:bg-primary cursor-pointer transition-colors">#DragonBridge</span>
+<span class="px-3 py-1.5 rounded-lg bg-card-dark text-[#ce9e8d] text-sm font-medium hover:text-white hover:bg-primary cursor-pointer transition-colors">#NightMarket</span>
+<span class="px-3 py-1.5 rounded-lg bg-card-dark text-[#ce9e8d] text-sm font-medium hover:text-white hover:bg-primary cursor-pointer transition-colors">#Seafood</span>
+<span class="px-3 py-1.5 rounded-lg bg-card-dark text-[#ce9e8d] text-sm font-medium hover:text-white hover:bg-primary cursor-pointer transition-colors">#CoconutCoffee</span>
+</div>
+<div class="p-4 rounded-xl bg-[#361f17] border border-transparent hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-primary uppercase">Top Restaurant</span>
+<div class="flex text-yellow-500 text-[10px]">
+<span class="material-symbols-outlined text-[14px] fill">star</span>
+<span class="material-symbols-outlined text-[14px] fill">star</span>
+<span class="material-symbols-outlined text-[14px] fill">star</span>
+<span class="material-symbols-outlined text-[14px] fill">star</span>
+<span class="material-symbols-outlined text-[14px] fill">star_half</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="size-12 rounded-lg bg-gray-700 bg-cover bg-center" data-alt="Top trending restaurant interior" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC44K443JR7UMbAroXek0nEpaWSrOo2FVVe610CsInfYYc6-z17nF5pDDWM4k-JuWzlGeDplVRz-aboqZqv9cEnS60AS6G-2YUCepqD_RdURibEihpv0UQ_6yedxtehWjvnVNu-hkHBR9BskgtRgy5X6Qy4NGf6y7wbyT_dSCabISdHHwGi-5HQWSus9NDiLbJqFqCAp5pfgcFkD_KxNksety8ZRoq1BPbc75OFnyb9EkQgv-Q3WHFfq9cGkw15pwEq3589QqMpZ9E');"></div>
+<div>
+<h4 class="text-white text-sm font-bold">4P's Pizza</h4>
+<p class="text-[#ce9e8d] text-xs">Italian • Fusion</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Mini Widget -->
+<div class="relative w-full h-32 rounded-xl overflow-hidden cursor-pointer group">
+<img alt="Map view of Da Nang city" class="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700" data-location="Da Nang" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCJHVNNGmov5G07j7UncGSpqgsn9ChAoguFYlzcjrsHEvgJMt61pKJGqkluicXOlNYzi5zn_mEiiqBx9mnbxDRLcBEPMKWixUfds95yU4YM6m1ON2QGgN-I5W4CLRNFSnu7G6kGEXfd8gHgCXlz7W6PqQ9vIA2IcUxFqtbY8uJnnieiM0rC8uVtfJFZW9eGsJT6Bbc6rhnUguqtMrxEyBbpWl56ld2WX9K2921WoWR_6hmbmtzDTfO15GL_D7T4D96ulDhxOUgvl0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent flex flex-col justify-end p-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px] fill">map</span>
+<span class="text-white font-bold text-sm">Explore Map View</span>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

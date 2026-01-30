@@ -1,0 +1,301 @@
+/* ================================================
+   FoodAI Sidebar Widgets
+   Live Map, Nutrition Tracker, Trending Tags, Promo
+   ================================================ */
+
+/* === SIDEBAR CONTAINER === */
+.sidebar {
+    position: sticky;
+    top: 96px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        display: none;
+    }
+}
+
+/* === WIDGET BASE === */
+.widget {
+    background: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* === LIVE MAP WIDGET === */
+.map-widget {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-surface);
+    border-radius: var(--radius-2xl);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0;
+}
+
+.map-widget-image {
+    height: 192px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+}
+
+.map-widget-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(35, 20, 15, 0.9) 0%, transparent 50%);
+}
+
+.map-widget-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+    width: 100%;
+}
+
+.map-widget-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    color: var(--color-primary);
+}
+
+.map-widget-badge .material-symbols-outlined {
+    font-size: 18px;
+    animation: pulse 2s ease-out infinite;
+}
+
+.map-widget-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.map-widget-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.map-widget-subtitle {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+}
+
+.map-widget-button {
+    width: 100%;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.map-widget-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Floating avatars */
+.map-avatar {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid white;
+    background-size: cover;
+    background-position: center;
+}
+
+/* === NUTRITION WIDGET === */
+.nutrition-widget-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.nutrition-widget-title {
+    font-weight: 700;
+    color: white;
+}
+
+.nutrition-progress {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.nutrition-circle {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 4px solid var(--color-primary);
+    border-right-color: transparent;
+    transform: rotate(-45deg);
+}
+
+.nutrition-circle-value {
+    position: absolute;
+    transform: rotate(45deg);
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+
+.nutrition-info {
+    flex: 1;
+}
+
+.nutrition-info-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 2px;
+}
+
+.nutrition-info-goal {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+}
+
+.nutrition-macros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.nutrition-macro {
+    background: #23140f;
+    border-radius: var(--radius-lg);
+    padding: 8px;
+    text-align: center;
+}
+
+.nutrition-macro-label {
+    font-size: 10px;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.nutrition-macro-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+}
+
+/* === TRENDING TAGS === */
+.trending-tags-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+}
+
+.trending-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.trending-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--color-surface);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.trending-tag:hover {
+    background: #4b2c20;
+    color: var(--color-primary);
+}
+
+/* === PROMO CARD === */
+.promo-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #ff8c5a 100%);
+    border-radius: var(--radius-2xl);
+    padding: 20px;
+    color: white;
+}
+
+.promo-content {
+    position: relative;
+    z-index: 2;
+}
+
+.promo-badge {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 4px;
+}
+
+.promo-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.promo-text {
+    font-size: 14px;
+    opacity: 0.9;
+    margin-bottom: 12px;
+}
+
+.promo-button {
+    background: white;
+    color: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.promo-button:hover {
+    transform: scale(1.05);
+}
+
+.promo-icon {
+    position: absolute;
+    right: -24px;
+    bottom: -24px;
+    font-size: 120px;
+    color: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}

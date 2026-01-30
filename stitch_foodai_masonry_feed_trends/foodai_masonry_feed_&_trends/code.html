@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FoodAI - Masonry Feed</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff6933",
+                        "background-light": "#f8f6f5",
+                        "background-dark": "#23140f",
+                        "secondary-text": "#ce9e8d",
+                        "surface-dark": "#2f1b15", // Slightly lighter than background-dark for cards
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for horizontal scrolling */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen font-display text-gray-900 dark:text-white antialiased selection:bg-primary selection:text-white">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 border-b border-[#4b2c20] bg-background-dark/95 backdrop-blur-md px-6 py-3">
+<div class="mx-auto flex max-w-[1400px] items-center justify-between gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined text-[24px]">restaurant_menu</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-white">FoodAI</h2>
+</div>
+<!-- Search -->
+<div class="hidden max-w-lg flex-1 md:block">
+<label class="relative flex h-11 w-full items-center overflow-hidden rounded-xl bg-[#4b2c20] focus-within:ring-2 focus-within:ring-primary/50">
+<div class="flex h-full items-center justify-center pl-4 text-secondary-text">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="h-full w-full border-none bg-transparent px-4 text-sm text-white placeholder-secondary-text focus:outline-none focus:ring-0" placeholder="Search dish, diet, or AI recommendation..."/>
+<div class="absolute right-3 flex items-center gap-1 rounded bg-[#5c3628] px-2 py-0.5 text-[10px] font-medium text-secondary-text">
+<span>⌘</span><span>K</span>
+</div>
+</label>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-6">
+<nav class="hidden gap-6 lg:flex">
+<a class="text-sm font-medium text-white hover:text-primary transition-colors" href="#">Social</a>
+<a class="text-sm font-medium text-secondary-text hover:text-white transition-colors" href="#">Delivery</a>
+<a class="text-sm font-medium text-secondary-text hover:text-white transition-colors" href="#">Nutrition</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="relative flex size-10 items-center justify-center rounded-xl bg-[#4b2c20] text-white hover:bg-[#5c3628] transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute right-2.5 top-2.5 size-2 rounded-full bg-primary border border-background-dark"></span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-xl bg-[#4b2c20] text-white hover:bg-[#5c3628] transition-colors">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</button>
+<div class="h-10 w-10 cursor-pointer overflow-hidden rounded-full border-2 border-[#4b2c20] bg-cover bg-center" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAPaeTIWmIO4r8HB6oV6Riq9sIYEVsc2OGDg27rEEa32bYQJeC-cyeWOih8ffttTOD8Po9oqJLWepE27jJ3kg_ATvhFwGZp7AMtACmACvr-XTsUg3XXVxcHj-4AKa-dt2-C-J3n7AaGAR2iQVeYmpOWgHLczccrEvPElugnutLI4FOWW0i_CzFVAg6USao5xk498tUy1lo1w8OfrbM9_MNfuqGXlFCsgmW3HHhzmddjU7SPtlq5e3Frt6atUmzhzYldk8_icf85Exc");'></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="mx-auto flex max-w-[1400px] flex-col gap-8 p-6 lg:flex-row lg:p-8">
+<!-- Left Content Area -->
+<div class="flex-1 min-w-0">
+<!-- Best Seller Carousel Section -->
+<section class="mb-10">
+<div class="mb-5 flex items-end justify-between px-2">
+<div>
+<h1 class="text-3xl font-bold leading-tight text-white tracking-tight">Da Nang's Daily Top 5</h1>
+<p class="mt-1 text-sm text-secondary-text">Trending dishes based on 14k+ orders today</p>
+</div>
+<a class="flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary/80" href="#">
+                        View all <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="no-scrollbar -mx-6 flex overflow-x-auto px-6 pb-4">
+<!-- Carousel Item 1 -->
+<div class="mr-4 w-72 shrink-0 md:w-80 cursor-pointer group">
+<div class="relative aspect-video w-full overflow-hidden rounded-xl">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Bowl of Mi Quang noodles with shrimp" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAk6rgz1fOZbxucHH7byq7PQL_X7ZMcSxkit3JTG7T9B6oUzZBpNRUAT1kZi6_UmCB8y4OhqieccPoYWI9sroBk28d7dLlDP4pMtA5MyUgKw_3RWm3rJ--WEdfLSluM954prWG8alY7XO4MyyBMvkOGD0zs4GnnkQTtZQoye4Gm0Jfom0joPSHmyMFLdRRNAU4ijdr_e_VwlTfJv8l4eccOeUEtdli8-EoiJQazAX77vvUfJfArhQtSvPu1N6jsdHzBPI7KZJZd0i8");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute left-4 top-4 flex size-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-white shadow-lg">#1</div>
+<div class="absolute bottom-4 left-4 right-4">
+<h3 class="truncate text-lg font-bold text-white">Mì Quảng Bà Mua</h3>
+<p class="text-xs text-white/80">Hải Châu • 1.2k orders</p>
+</div>
+</div>
+</div>
+<!-- Carousel Item 2 -->
+<div class="mr-4 w-72 shrink-0 md:w-80 cursor-pointer group">
+<div class="relative aspect-video w-full overflow-hidden rounded-xl">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Vietnamese pancake Banh Xeo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4tQ7xxG_Qx0_lm8LIAb56JCK7B315Uooyx092PtxFvPBK7kMn8ppbW5QeVRw_PUoxFPQZ3fUHs52189K6tDlNM9ON8Q_BUVx5QToTPkeximrg7g8Bop_iA6b1WiEs1AM52XzN29XkNrrYgITZ2OcrgKNm28dzoOe3cIcDMOZFV7qajRq6i-1Fg9zcWfQ6Rp1ronHFigCQaKk-L0_0RLtaDzPaAD9KyJN3oO1umPyifzxawFZFTt0PsWZ0PMF3_d949obg8h0gLVk");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute left-4 top-4 flex size-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-sm font-bold text-white border border-white/30">#2</div>
+<div class="absolute bottom-4 left-4 right-4">
+<h3 class="truncate text-lg font-bold text-white">Bánh Xèo Bà Dưỡng</h3>
+<p class="text-xs text-white/80">Hải Châu • 850 orders</p>
+</div>
+</div>
+</div>
+<!-- Carousel Item 3 -->
+<div class="mr-4 w-72 shrink-0 md:w-80 cursor-pointer group">
+<div class="relative aspect-video w-full overflow-hidden rounded-xl">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Bun Cha Ca fish cake noodle soup" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDUG1NpmYDgTxqFnrKuyhulPsc42TgTyE7smRmXcGfLs6T_vo7HWXwGq5_U7LcOeA2qhz_3sLohODh6qPWe6NQKKTkpmXUerr-HeZRnpCM6P0njO80ivzh6rWX1m1SPcTw1oGwczq0nwpL5Qr6LdxQ8n35i0DF5azT14Qgq4Xcpo-3Cos-AuNLu5KtixyQHR2BG5uAlbmgVDoUdCGsLQp6831H-fvtcWzth2YjH40BSV2ONnradsROtihRM7g3wV055uO1ARyZ5t5A");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute left-4 top-4 flex size-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-sm font-bold text-white border border-white/30">#3</div>
+<div class="absolute bottom-4 left-4 right-4">
+<h3 class="truncate text-lg font-bold text-white">Bún Chả Cá 109</h3>
+<p class="text-xs text-white/80">Sơn Trà • 600 orders</p>
+</div>
+</div>
+</div>
+<!-- Carousel Item 4 -->
+<div class="mr-4 w-72 shrink-0 md:w-80 cursor-pointer group">
+<div class="relative aspect-video w-full overflow-hidden rounded-xl">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Cao Lau noodles with pork and greens" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCTfaT1ohb1h-44e_9wCXtvEzQww8iyGs5JHZb6lDl5uoj0LvFKCWJAJhW14BqO6I98VZxHRM6XY8LxMqUqvafJ8MNjK_VIItvBHLdw3eEhFllzUovBTQ1ewSHPnAdBtgIKLXXXg3lIZBjo5LFgPhFoto-gLSlfR-lLoznXwRs2KefeSy52di_PfQJM0AfdZbg2_rQSkroqOlPa1qscIe3cdy5IO0UgvJWB1_MiTcv2vWaJ5hC_IuXVBdwkEv1b7oR3CO-lhFACGic");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute left-4 top-4 flex size-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-sm font-bold text-white border border-white/30">#4</div>
+<div class="absolute bottom-4 left-4 right-4">
+<h3 class="truncate text-lg font-bold text-white">Cao Lầu Thanh</h3>
+<p class="text-xs text-white/80">Hội An Style • 430 orders</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feed Header -->
+<div class="mb-6 flex items-center justify-between px-2">
+<h2 class="text-2xl font-bold text-white">For You • AI Curated</h2>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 rounded-lg bg-surface-dark px-3 py-1.5 text-xs font-medium text-white hover:bg-[#4b2c20]">
+<span class="material-symbols-outlined text-[16px]">tune</span> Filter
+                    </button>
+<button class="flex items-center gap-2 rounded-lg bg-surface-dark px-3 py-1.5 text-xs font-medium text-white hover:bg-[#4b2c20]">
+<span class="material-symbols-outlined text-[16px]">grid_view</span> View
+                    </button>
+</div>
+</div>
+<!-- Masonry Grid -->
+<!-- Using Tailwind columns for masonry effect -->
+<div class="columns-1 gap-6 sm:columns-2 lg:columns-3 space-y-6">
+<!-- Card 1 -->
+<article class="break-inside-avoid group relative overflow-hidden rounded-2xl bg-surface-dark transition-all hover:shadow-xl hover:shadow-primary/10">
+<div class="relative aspect-[4/5] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Spicy Bun Bo Hue beef noodle soup" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDsRwbTNDd1HOqci_W_1UbSoUp9GsDZ2Llv75TLTDCjHkJputOf98ba4FkUcOTTq_5yDNvNVyzJE6G9u03TDsCeyEjoBHqD5osLth6_gdWBffPKM2e9UuMFunCfZ2yxkg8antgbYcUkQBHYX070CRNiC_kV9NJIclsWMMurnXvMhJauV514QMq4iOmFRM6fLiKAFv9fKiWcIGNVLl8dH0_4KOnw4cJs1RpT_bHOFyhfkY-BAVlktGFPy5FQWQERnrYY3Uy3EGmqQ-w");'></div>
+<!-- AI Badge -->
+<div class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">smart_toy</span>
+                            98% Match
+                        </div>
+<button class="absolute right-3 top-3 flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+<!-- Hover Overlay with Order Button -->
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+<button class="flex transform items-center gap-2 rounded-xl bg-primary px-6 py-2.5 font-bold text-white shadow-lg transition-transform duration-300 translate-y-4 group-hover:translate-y-0">
+                                Order Now <span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<div class="mb-2 flex items-start justify-between">
+<div>
+<h3 class="font-bold text-white text-lg leading-tight">Bún Bò Huế Special</h3>
+<p class="text-sm text-secondary-text">Keto Friendly • High Protein</p>
+</div>
+<div class="flex items-center gap-1 rounded bg-orange-500/10 px-1.5 py-0.5 text-xs font-bold text-orange-400">
+<span class="material-symbols-outlined text-[12px] fill-current">star</span> 4.9
+                            </div>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-3">
+<div class="text-sm font-medium text-white">$3.50</div>
+<div class="flex items-center gap-1 text-xs text-secondary-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 15 min
+                            </div>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="break-inside-avoid group relative overflow-hidden rounded-2xl bg-surface-dark transition-all hover:shadow-xl hover:shadow-primary/10">
+<div class="relative aspect-[3/2] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Com Ga Hoi An chicken rice" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuACW_BsZCXqjXvEXTOaij-g3SZ-VIwoMQrFRhLTSYkKjazwRAHYrJ4YQNUy-uxBrqeH676mfDN5-9dxhEGrPA1qE_p6rwuDgfWtyd1CCtGP8BUakDOubv6Xgg2zsx78MKOB5jkJHHgb3gbCW2Kf6Csc5QMDwIUkJGV92hmLwp-UzR9JSD_n0RvY-KDhGcOM5C0IDTDDN-PBc0X3Wkj6gwFy0VMvlKO9R-5OWJTh8elfp22oYNpG3QAtDOq9kWnY4q6GJr75N-iRUhg");'></div>
+<!-- AI Badge -->
+<div class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+                            Energy Boost
+                        </div>
+<button class="absolute right-3 top-3 flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<div class="mb-2">
+<h3 class="font-bold text-white text-lg leading-tight">Cơm Gà Hội An</h3>
+<p class="text-sm text-secondary-text">Balanced Carbs • Post-Workout</p>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-3">
+<div class="text-sm font-medium text-white">$4.20</div>
+<div class="flex items-center gap-1 text-xs text-secondary-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 20 min
+                            </div>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="break-inside-avoid group relative overflow-hidden rounded-2xl bg-surface-dark transition-all hover:shadow-xl hover:shadow-primary/10">
+<div class="relative aspect-square w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Vietnamese sandwich Banh Mi" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6Gr8N23232gpegdjPM1tOwN_qtehyJiGIF-U01EYkavAm_q88WG_6DIB_qjbt1nFZkTrcEuxaXVXuksKBP-6lUmaSdNxQ7E74RWUIR29aHK_s0e9xYgaIA64rhPtFe0_jUmI9OgxSWK53kATeBQ7RRa8DcGKkWaDVJfAERUNdzMGO46RgVB1Ewnk5t7vcvpGHfSv7NZUpEIxViBWasQAdj3cInHluW1_CUEOTvlVSKFk7TNwLYs6KRZDkLPDnXq4-qwzXsTB-Md8");'></div>
+<!-- AI Badge -->
+<div class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-purple-500/30 bg-purple-950/80 px-3 py-1 text-xs font-semibold text-purple-300 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">savings</span>
+                            Best Value
+                        </div>
+<button class="absolute right-3 top-3 flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<div class="mb-2">
+<h3 class="font-bold text-white text-lg leading-tight">Bánh Mì Phượng</h3>
+<p class="text-sm text-secondary-text">Local Favorite • Quick Bite</p>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-3">
+<div class="text-sm font-medium text-white">$1.50</div>
+<div class="flex items-center gap-1 text-xs text-secondary-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 10 min
+                            </div>
+</div>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="break-inside-avoid group relative overflow-hidden rounded-2xl bg-surface-dark transition-all hover:shadow-xl hover:shadow-primary/10">
+<div class="relative aspect-[3/4] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Avocado ice cream dessert" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDuHAt9YXUwADQ_Y3e6zWA-oCwPbM-TV45y_9bcBeMcq3VN9Di2ocqEiNnqtKTOVWEtYD1tNHftIimTTRUdp_6YXTK21z0WTaYv4xyTj4XHV1WAEyhAVTmAdUvuqPb82Y0MiEAJk9mO0c6mUwurK7tGhn1nAT0FATV_mFRhEBVabDAfiiuCeJMMvLdcKUjvF4JoDF5TrzXFdwSXqK-nnDRBvyfrSZ-6WY_ndhVsxmVH3KFKhtsvUdPnHlpK23XyB8TnvwEIi3Lg1gU");'></div>
+<!-- AI Badge -->
+<div class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-green-500/30 bg-green-950/80 px-3 py-1 text-xs font-semibold text-green-300 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">eco</span>
+                            Low Calorie
+                        </div>
+<button class="absolute right-3 top-3 flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<div class="mb-2">
+<h3 class="font-bold text-white text-lg leading-tight">Kem Bơ (Avocado Ice Cream)</h3>
+<p class="text-sm text-secondary-text">Dessert • 400 kcal</p>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-3">
+<div class="text-sm font-medium text-white">$2.00</div>
+<div class="flex items-center gap-1 text-xs text-secondary-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 5 min
+                            </div>
+</div>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="break-inside-avoid group relative overflow-hidden rounded-2xl bg-surface-dark transition-all hover:shadow-xl hover:shadow-primary/10">
+<div class="relative aspect-[4/3] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Seafood hotpot with shrimp and vegetables" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRpRY6RQz1IglQhut6G1FggA1NriF81l80S4jeYy2zc_7GqpouTe4OD581cqLdKCxjsPgDjmbHzlhoP2-DRljh3Dda_-k4XYL01hSaqz7s0mtamVY7cIcrQ1mlbi34DI3gRoY59WQH9HPh56mb2qhx5V1VbE4hj0785ndXIixJHv42fyz7gcRE9QrjKJ3Rnon-c3Mi7ZMOOS9QxB1Tk-SiPf0K-xQQz805ug_1cAwMaduWlYg_LuxuNV7yEQ513zsNWpCmj_0VWz8");'></div>
+<!-- AI Badge -->
+<div class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">groups</span>
+                            Group Deal
+                        </div>
+<button class="absolute right-3 top-3 flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<div class="mb-2">
+<h3 class="font-bold text-white text-lg leading-tight">Seafood Hotpot</h3>
+<p class="text-sm text-secondary-text">Shareable • Spicy</p>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-3">
+<div class="text-sm font-medium text-white">$12.00</div>
+<div class="flex items-center gap-1 text-xs text-secondary-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 40 min
+                            </div>
+</div>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="break-inside-avoid group relative overflow-hidden rounded-2xl bg-surface-dark transition-all hover:shadow-xl hover:shadow-primary/10">
+<div class="relative aspect-[3/4] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" data-alt="Fresh spring rolls Goid Cuon" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDmb4oX5NEl7gPkPVNL6g_D7qIHFZ4iXNGyl504Sz1xsALpEcQPtazyH80vmzEkOws8N2v-9LNqyf1reuHt__04-KhdXsC2IkNkbJ1O2OvyTDOXYZItkv4vk1muGL_lzZFML0oq4DbtcBYmy3i6snDH1YYXomXNd9z-7dvKUpxklFBwNN0pSfwn_lRwpHCFEgJRzdfStKiNbqOJG9d9eb8EqlP0nzD_YOa0e0CVDZVjdczPxOy2CSVUymZQyYYOEB0reKO3hU9GdFk");'></div>
+<!-- AI Badge -->
+<div class="absolute left-3 top-3 flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+                            AI Pick
+                        </div>
+<button class="absolute right-3 top-3 flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-4">
+<div class="mb-2">
+<h3 class="font-bold text-white text-lg leading-tight">Gỏi Cuốn (Spring Rolls)</h3>
+<p class="text-sm text-secondary-text">Fresh • Healthy</p>
+</div>
+<div class="flex items-center justify-between border-t border-white/5 pt-3">
+<div class="text-sm font-medium text-white">$2.50</div>
+<div class="flex items-center gap-1 text-xs text-secondary-text">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 10 min
+                            </div>
+</div>
+</div>
+</article>
+</div>
+</div>
+<!-- Sidebar Right Rail -->
+<aside class="flex w-full flex-col gap-6 lg:w-80 lg:shrink-0 sticky top-24 h-fit">
+<!-- Live Map Discovery -->
+<div class="relative overflow-hidden rounded-2xl bg-surface-dark border border-white/5">
+<div class="h-48 w-full bg-cover bg-center opacity-70" data-alt="Map of Da Nang city streets" data-location="Da Nang" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA46b74oRiVaw_bnX4amxByAjeQO1Cx_Tv2zmkd7BWV6a7SwEgb5Rk7IbAXKqMMU761M08aHkyXg9_qAozuooLalF7yRHNPiKtExl3DVS9zj09URIr0451EaqpfqW5ldVpjqVxWKeShia-L8IIvCOx6lyvSCjKHIirl2_MiPUmWr3Lkre5XO7TA3gcTXiLo6TtELAaKtZvXUT4pQvJKxhZj0UrDifkpdXzC06FsdCJuAojVv7wQpfuRzRjXAUe20HcDYXOLH9fjyLQ");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-4 w-full">
+<div class="flex items-center gap-2 mb-1 text-primary">
+<span class="material-symbols-outlined animate-pulse text-[18px]">location_on</span>
+<span class="text-xs font-bold uppercase tracking-wider">Live Discovery</span>
+</div>
+<h3 class="text-lg font-bold text-white">Hải Châu District</h3>
+<p class="text-sm text-secondary-text">324 orders in the last hour</p>
+<button class="mt-3 w-full rounded-lg bg-white/10 py-2 text-xs font-semibold text-white backdrop-blur hover:bg-white/20 transition-colors">
+                        Explore Map
+                    </button>
+</div>
+<!-- Floating Avatars indicating activity -->
+<div class="absolute top-8 left-12 h-6 w-6 rounded-full border border-white bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAYWBx0Eb66Z8AmLRB0Sc4Bk9IR1w-o0zdeaKDR0k4phkqRzV2kdvwoP40cg0tbSqy2NUnf7FFwHID3YBiTaOmFf3ZhbQm333t_Nqlmlb8PMYohG6IvSTLC-qVExuh5eCu4cAkm9Bc2IAcQlhTx-8gwjtrZQaqcc9Tmg_Qlg8t8ksebAq9Oyl2O6qgJFFRbQxqhpLlh_AKxR7tKv1q-RqjbkSRWouUAjKDwZca8Nj9Mlt-ETR0dtQKzx-cU3q67qIG92V3jmgDOcOU")'></div>
+<div class="absolute top-12 right-12 h-6 w-6 rounded-full border border-white bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDHsq94z21cFqR3pvBWXrcYc0rA80OX15ZE9TXdL7zv-5Hafh1bFust25zECMgcv6kznAOQqmVot6cHW-DH-q-dA01Xiy1_K9aOcY6mMvklwKhw8EyP-dH9gRozO7gIxzTZQXsIiKnCEj3ptXmuhRiyrat8RZoB74PIPcsMfpzASx8Gw84L9QZuhypFcA0fnVw2GF-t80yk4Ybe9pJQAzbOsfT4Z6rBp80pmY34u_BvOe_tkLZwLDwLi6kBbSn60JTkKR-Dp1z3mhE")'></div>
+</div>
+<!-- Nutri-Stats Widget -->
+<div class="rounded-2xl bg-surface-dark p-5 border border-white/5">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="font-bold text-white">Your Nutrition</h3>
+<span class="material-symbols-outlined text-secondary-text text-[20px]">leaderboard</span>
+</div>
+<div class="flex items-center gap-4">
+<!-- Circular Progress Placeholder -->
+<div class="relative flex size-16 items-center justify-center rounded-full border-4 border-primary border-r-transparent rotate-[-45deg]">
+<span class="absolute rotate-[45deg] text-xs font-bold text-white">1250</span>
+</div>
+<div>
+<p class="text-sm font-medium text-white">Calories Left</p>
+<p class="text-xs text-secondary-text">Goal: 2000 kcal</p>
+</div>
+</div>
+<div class="mt-4 grid grid-cols-3 gap-2">
+<div class="rounded-lg bg-background-dark p-2 text-center">
+<div class="text-[10px] text-secondary-text uppercase">Prot</div>
+<div class="text-sm font-bold text-white">84g</div>
+</div>
+<div class="rounded-lg bg-background-dark p-2 text-center">
+<div class="text-[10px] text-secondary-text uppercase">Carb</div>
+<div class="text-sm font-bold text-white">120g</div>
+</div>
+<div class="rounded-lg bg-background-dark p-2 text-center">
+<div class="text-[10px] text-secondary-text uppercase">Fat</div>
+<div class="text-sm font-bold text-white">45g</div>
+</div>
+</div>
+</div>
+<!-- Trending Tags -->
+<div>
+<h3 class="mb-3 text-sm font-bold uppercase tracking-wider text-secondary-text">Trending Now</h3>
+<div class="flex flex-wrap gap-2">
+<a class="rounded-full bg-surface-dark border border-white/5 px-3 py-1.5 text-xs font-medium text-white hover:bg-[#4b2c20] hover:text-primary transition-colors" href="#">#BanhMi</a>
+<a class="rounded-full bg-surface-dark border border-white/5 px-3 py-1.5 text-xs font-medium text-white hover:bg-[#4b2c20] hover:text-primary transition-colors" href="#">#StreetFood</a>
+<a class="rounded-full bg-surface-dark border border-white/5 px-3 py-1.5 text-xs font-medium text-white hover:bg-[#4b2c20] hover:text-primary transition-colors" href="#">#Vegan</a>
+<a class="rounded-full bg-surface-dark border border-white/5 px-3 py-1.5 text-xs font-medium text-white hover:bg-[#4b2c20] hover:text-primary transition-colors" href="#">#DaNangEats</a>
+<a class="rounded-full bg-surface-dark border border-white/5 px-3 py-1.5 text-xs font-medium text-white hover:bg-[#4b2c20] hover:text-primary transition-colors" href="#">#SpicyChallenge</a>
+</div>
+</div>
+<!-- Ad / Promo -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-orange-600 p-5 text-white">
+<div class="relative z-10">
+<p class="text-xs font-bold uppercase opacity-80 mb-1">Premium</p>
+<h3 class="text-lg font-bold mb-2">Get Free Delivery</h3>
+<p class="text-sm mb-3 opacity-90">Unlock unlimited free delivery on orders over $5.</p>
+<button class="rounded-lg bg-white text-primary px-4 py-2 text-xs font-bold">Try for Free</button>
+</div>
+<div class="absolute -right-6 -bottom-6 text-white/20">
+<span class="material-symbols-outlined text-[120px]">local_shipping</span>
+</div>
+</div>
+</aside>
+</main>
+</body></html>
