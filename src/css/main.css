@@ -1,0 +1,18 @@
+/* ================================================
+   FoodAI - Consolidated Main Stylesheet
+   Vite builds this into optimized CSS
+   ================================================ */
+
+/* Design System: Colors, typography, spacing */
+@import url('./design-system.css');
+
+/* Component Library: Reusable UI components */
+@import url('./components.css');
+
+/* Extended Components: Additional UI patterns */
+@import url('./new-components.css');
+
+/* Screen Styles: Page-specific styles */
+@import url('./screens.css');
+@import url('./screens2.css');
+@import url('./screens3.css');

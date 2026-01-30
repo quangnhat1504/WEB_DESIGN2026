@@ -4,9 +4,11 @@
   "description": "AI-powered food discovery platform with social features, nutrition tracking, and interactive maps",
   "main": "index.html",
   "scripts": {
-    "start": "live-server --port=3000 --open=index.html",
-    "dev": "live-server --port=3000 --open=index.html --watch=.",
-    "serve": "http-server -p 3000 -o"
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "legacy-start": "live-server --port=3000 --open=index.html"
   },
   "keywords": [
     "food",
@@ -19,8 +21,9 @@
   "author": "FoodAI Team",
   "license": "MIT",
   "devDependencies": {
+    "http-server": "^14.1.1",
     "live-server": "^1.2.2",
-    "http-server": "^14.1.1"
+    "vite": "^7.3.1"
   },
   "repository": {
     "type": "git",
