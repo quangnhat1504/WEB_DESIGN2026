@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodAI - AI-Powered Food Discovery</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/design-system.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/new-components.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="top-bar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div
+                style="width: 40px; height: 40px; display: flex; align-items: center; justify-center; background: var(--color-primary); border-radius: 12px;">
+                <span class="material-symbols-outlined" style="color: white;">restaurant</span>
+            </div>
+            <h1 style="font-size: 24px; font-weight: 700; color: var(--color-text-primary);">FoodAI</h1>
+        </div>
+        <nav style="display: flex; gap: 24px; align-items: center;">
+            <a href="#features"
+                style="text-decoration: none; color: var(--color-text-secondary); font-weight: 500; font-size: 14px;">Features</a>
+            <a href="#demo"
+                style="text-decoration: none; color: var(--color-text-secondary); font-weight: 500; font-size: 14px;">Demo</a>
+            <button class="btn btn-primary">Get Started</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 80px 24px; text-align: center;">
+        <h2
+            style="font-size: 48px; font-weight: 700; color: var(--color-text-primary); margin-bottom: 16px; line-height: 1.2;">
+            Discover Food with<br>
+            <span style="color: var(--color-primary);">AI-Powered Insights</span>
+        </h2>
+        <p
+            style="font-size: 18px; color: var(--color-text-secondary); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Explore restaurants, track nutrition, and make smarter food choices with personalized AI recommendations.
+        </p>
+
+        <!-- Feature Cards -->
+        <div id="demo"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 60px; text-align: left;">
+
+            <!-- Social Feed Card -->
+            <a href="social-feed.html" class="card" style="text-decoration: none; display: block; padding: 32px;">
+                <div
+                    style="width: 48px; height: 48px; background: var(--color-primary-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                    <span class="material-symbols-outlined"
+                        style="color: var(--color-primary); font-size: 28px;">dynamic_feed</span>
+                </div>
+                <h3 style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px;">
+                    Social Feed</h3>
+                <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                    Instagram-style feed with posts, stories, and AI nutrition analysis on every dish.
+                </p>
+                <div class="flex items-center"
+                    style="gap: 8px; color: var(--color-primary); font-weight: 600; font-size: 14px;">
+                    <span>View Demo</span>
+                    <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                </div>
+            </a>
+
+            <!-- Discovery Feed Card -->
+            <a href="discovery.html" class="card" style="text-decoration: none; display: block; padding: 32px;">
+                <div
+                    style="width: 48px; height: 48px; background: rgba(34, 197, 94, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                    <span class="material-symbols-outlined"
+                        style="color: var(--color-secondary); font-size: 28px;">grid_view</span>
+                </div>
+                <h3 style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px;">
+                    Discovery Feed</h3>
+                <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                    Pinterest-style masonry layout with AI-curated dishes and nutrition tracking.
+                </p>
+                <div class="flex items-center"
+                    style="gap: 8px; color: var(--color-secondary); font-weight: 600; font-size: 14px;">
+                    <span>View Demo</span>
+                    <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                </div>
+            </a>
+
+            <!-- Personalized Home Card -->
+            <a href="home.html" class="card" style="text-decoration: none; display: block; padding: 32px;">
+                <div
+                    style="width: 48px; height: 48px; background: rgba(59, 130, 246, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                    <span class="material-symbols-outlined"
+                        style="color: var(--color-info); font-size: 28px;">home</span>
+                </div>
+                <h3 style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px;">
+                    Personal Feed</h3>
+                <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                    Personalized home with AI dinner suggestions, trending reels, and weather integration.
+                </p>
+                <div class="flex items-center"
+                    style="gap: 8px; color: var(--color-info); font-weight: 600; font-size: 14px;">
+                    <span>View Demo</span>
+                    <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                </div>
+            </a>
+
+            <!-- Map Discovery Card -->
+            <a href="map.html" class="card" style="text-decoration: none; display: block; padding: 32px;">
+                <div
+                    style="width: 48px; height: 48px; background: rgba(239, 68, 68, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                    <span class="material-symbols-outlined"
+                        style="color: var(--color-error); font-size: 28px;">map</span>
+                </div>
+                <h3 style="font-size: 20px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 8px;">Map
+                    Discovery</h3>
+                <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 16px;">
+                    Interactive map with heatmap visualization and restaurant discovery panels.
+                </p>
+                <div class="flex items-center"
+                    style="gap: 8px; color: var(--color-error); font-weight: 600; font-size: 14px;">
+                    <span>View Demo</span>
+                    <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: var(--color-surface); padding: 40px 24px; text-align: center; margin-top: 80px;">
+        <p style="color: var(--color-text-secondary); font-size: 14px;">
+            © 2024 FoodAI. AI-powered food discovery prototype.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 24px; margin-top: 16px;">
+            <a href="#" style="color: var(--color-text-tertiary); font-size: 12px; text-decoration: none;">About</a>
+            <a href="#" style="color: var(--color-text-tertiary); font-size: 12px; text-decoration: none;">Privacy</a>
+            <a href="#" style="color: var(--color-text-tertiary); font-size: 12px; text-decoration: none;">Terms</a>
+        </div>
+    </footer>
+</body>
+
+</html>
