@@ -1,12 +1,21 @@
+﻿# Dependencies
 node_modules/
+package-lock.json
+
+# OS Files
 .DS_Store
 Thumbs.db
-*.log
-*.zip
-image/extracted*/
-image/*.zip
+
+# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
+
+# Build outputs
+dist/
+build/
+
+# Environment
+.env
+.env.local

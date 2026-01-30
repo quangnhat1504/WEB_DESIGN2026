@@ -1,134 +1,95 @@
-# FoodAI Prototype
+﻿# FoodAI - AI-Powered Food Discovery Platform
 
-AI-powered food discovery platform with social features, nutrition tracking, and interactive maps.
+> Modern web application for discovering food, tracking nutrition, and making smarter dining choices with AI-powered recommendations.
+
+![Version](https://img.shields.io/badge/version-1.0.0-orange)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js (version 14 or higher)
-- npm (version 6 or higher)
+```bash
+# Install dependencies
+npm install
 
-### Installation
+# Start development server
+npm start
+```
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Start the development server:**
-   ```bash
-   npm start
-   ```
-
-   The application will automatically open in your default browser at `http://localhost:8000`
-
-### Alternative Commands
-
-- **Start server without auto-opening browser:**
-  ```bash
-  npm run serve
-  ```
-
-- **Development mode (same as start):**
-  ```bash
-  npm run dev
-  ```
+Application will be available at **http://localhost:8080**
 
 ## 📁 Project Structure
 
 ```
 foodai-prototype/
-├── index.html              # Landing page
-├── home.html              # Main home page
-├── social-feed.html       # Social feed page
-├── discovery.html         # Discovery/Explore page
-├── map.html               # Map view
-├── ai-nutritionist.html   # AI Nutritionist chat
-├── orders.html            # Order history
-├── saved.html             # Saved items
+├── pages/                # All HTML pages
+│   ├── home.html            # Social feed / Home
+│   ├── discovery.html       # Explore dishes
+│   ├── map.html             # Restaurant map
+│   ├── ai-nutritionist.html # AI chat
+│   ├── orders.html          # Order history
+│   ├── saved.html           # Saved items
+│   └── social-feed.html     # Extended feed
 ├── assets/
-│   └── css/
-│       ├── design-system.css    # Design tokens & variables
-│       ├── components.css       # Reusable components
-│       ├── new-components.css   # Additional components
-│       ├── screens.css          # Screen-specific styles
-│       ├── screens2.css         # More screen styles
-│       └── screens3.css         # Additional screens
-├── package.json           # Project dependencies
-└── README.md             # This file
+│   ├── css/              # Stylesheets
+│   │   ├── design-system.css   # Design tokens & variables
+│   │   ├── components.css      # Reusable UI components
+│   │   └── new-components.css  # Additional components
+│   ├── js/               # JavaScript modules (future)
+│   └── images/           # Images & assets (future)
+├── docs/                 # Documentation
+│   ├── IMPROVEMENTS.md   # Improvement roadmap
+│   ├── SETUP.md         # Setup guide
+│   └── STRUCTURE.md     # Architecture details
+├── index.html           # Landing page
+└── package.json         # Dependencies
 ```
 
-## 🌐 Pages Overview
+## 🎨 Features
 
-- **Landing Page** (`index.html`) - Welcome page
-- **Home** (`home.html`) - Main application interface
-- **Social Feed** (`social-feed.html`) - Social media-style food sharing
-- **Explore** (`discovery.html`) - Discover trending dishes and restaurants
-- **Map** (`map.html`) - Interactive restaurant map
-- **AI Nutritionist** (`ai-nutritionist.html`) - AI-powered nutrition advice
-- **Orders** (`orders.html`) - Order tracking and history
-- **Saved** (`saved.html`) - Favorite dishes and collections
+### ✅ Implemented
+- [x] Responsive design (desktop, tablet, mobile)
+- [x] Social feed with posts, likes, comments
+- [x] Top 10 trending dishes carousel
+- [x] Interactive map with Leaflet.js
+- [x] AI nutrition chat interface (UI)
+- [x] Order tracking system (UI)
+- [x] Favorites/saved items
+- [x] Dark theme support (CSS ready)
 
-## 🛠️ Technologies
+### 📋 Planned
+See [docs/IMPROVEMENTS.md](docs/IMPROVEMENTS.md) for full roadmap
 
-- HTML5
-- CSS3 (Custom Properties, Flexbox, Grid)
-- Vanilla JavaScript
-- Google Fonts (Inter)
-- Material Symbols Icons
-- Mapbox API for maps
+## 🛠️ Technology Stack
 
-## 📦 Deployment
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+- **Maps**: Leaflet.js 1.9.4
+- **Icons**: Google Material Symbols
+- **Fonts**: Google Fonts (Inter)
+- **Server**: http-server (development)
 
-This is a static website that can be deployed to any static hosting service:
+## 📖 Pages
 
-### Deploy to Vercel
-```bash
-npm install -g vercel
-vercel
-```
+| Page | File | Description |
+|------|------|-------------|
+| Landing | `index.html` | Marketing page with hero section |
+| Home | `pages/home.html` | Main feed with social posts |
+| Discover | `pages/discovery.html` | Browse trending dishes |
+| Map | `pages/map.html` | Find nearby restaurants |
+| AI Nutritionist | `pages/ai-nutritionist.html` | Chat with AI for nutrition advice |
+| Orders | `pages/orders.html` | Track order history |
+| Saved | `pages/saved.html` | View favorited items |
+| Social Feed | `pages/social-feed.html` | Extended social feed |
 
-### Deploy to Netlify
-```bash
-npm install -g netlify-cli
-netlify deploy
-```
+## 📚 Documentation
 
-### Deploy to GitHub Pages
-1. Push your code to GitHub
-2. Go to Settings > Pages
-3. Select your branch and root folder
-4. Save and wait for deployment
+- **Setup Guide**: [docs/SETUP.md](docs/SETUP.md)
+- **Architecture**: [docs/STRUCTURE.md](docs/STRUCTURE.md)  
+- **Improvements**: [docs/IMPROVEMENTS.md](docs/IMPROVEMENTS.md)
 
-## 🔧 Troubleshooting
+## 🔗 Links
 
-### Port Already in Use
-If port 8000 is already in use, you can specify a different port:
-```bash
-npx http-server -p 3000
-```
-
-### Dependencies Not Installing
-Try clearing npm cache:
-```bash
-npm cache clean --force
-npm install
-```
-
-### Browser Not Opening Automatically
-Manually open your browser and navigate to:
-```
-http://localhost:8000
-```
-
-## 📄 License
-
-MIT License - feel free to use this project for learning and development.
-
-## 👥 Contributing
-
-This is a prototype project. Feel free to fork and customize for your needs.
+- **Repository**: [github.com/quangnhat1504/WEB_DESIGN2026](https://github.com/quangnhat1504/WEB_DESIGN2026)
 
 ---
 
-**Enjoy exploring FoodAI! 🍜🤖**
+**Built with ❤️ for food lovers**

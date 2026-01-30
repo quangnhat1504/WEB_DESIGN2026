@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="assets/css/design-system.css">
-    <link rel="stylesheet" href="assets/css/components.css">
-    <link rel="stylesheet" href="assets/css/new-components.css">
+    <link rel="stylesheet" href="../assets/css/design-system.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/new-components.css">
 
     <style>
         body {
@@ -537,14 +537,15 @@
             </div>
 
             <!-- User Profile -->
-            <div class="user-profile">
-                <img src="https://i.pravatar.cc/80?img=5" alt="User" class="user-avatar">
+            <div style="display: flex; align-items: center; gap: 12px; padding: 16px; background: linear-gradient(90deg, rgba(255, 105, 51, 0.1), rgba(255, 105, 51, 0.05)); border-radius: 0; border-top: 2px solid var(--color-primary); border-bottom: 2px solid var(--color-primary); margin: auto -24px 0 -24px; padding-left: 24px; padding-right: 24px;">
+                <img src="https://i.pravatar.cc/80?img=5" alt="User"
+                    style="width: 48px; height: 48px; border-radius: 8px; object-fit: cover; border: 2px solid var(--color-primary);">
                 <div style="flex: 1; min-width: 0;">
-                    <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Sarah Nguyen</div>
-                    <div style="font-size: 12px; color: var(--color-text-secondary);">Gold Member</div>
+                    <div style="font-weight: 700; font-size: 15px; color: var(--color-text-primary);">Sarah Nguyen</div>
+                    <div style="font-size: 12px; color: var(--color-primary); font-weight: 600;">Gold Member</div>
                 </div>
-                <button class="btn-icon">
-                    <span class="material-symbols-outlined" style="font-size: 20px;">more_vert</span>
+                <button class="btn-icon" style="background: white; border: 1px solid var(--color-border);" title="Account Settings">
+                    <span class="material-symbols-outlined" style="font-size: 20px;">settings</span>
                 </button>
             </div>
         </aside>
@@ -565,7 +566,7 @@
             <div class="map-header">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
                     <div style="display: flex; align-items: center; gap: 12px;">
-                        <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                        <a href="../index.html" style="display: flex; align-items: center; text-decoration: none;">
                             <div
                                 style="width: 36px; height: 36px; background: linear-gradient(135deg, var(--color-primary), #ea580c); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 18px;">
                                 F</div>
