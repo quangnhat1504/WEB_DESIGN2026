@@ -1,0 +1,492 @@
+/* ================================================
+   FoodAI Screen Layouts - Part 2
+   Scan, AI Result, Discover, Restaurant Screens
+   ================================================ */
+
+/* === SCAN === */
+.scan-screen {
+    min-height: 100vh;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.scan-viewfinder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scan-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.scan-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.scan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4);
+    padding-top: calc(var(--safe-area-top) + var(--space-4));
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.scan-header-title {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+    color: white;
+}
+
+.scan-btn-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    color: white;
+    border: none;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+.scan-frame {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-8);
+}
+
+.scan-frame-box {
+    width: 280px;
+    height: 280px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: var(--radius-xl);
+    position: relative;
+}
+
+.scan-frame-corner {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--color-primary);
+}
+
+.scan-frame-corner.tl {
+    top: -3px;
+    left: -3px;
+    border-right: none;
+    border-bottom: none;
+    border-radius: var(--radius-md) 0 0 0;
+}
+
+.scan-frame-corner.tr {
+    top: -3px;
+    right: -3px;
+    border-left: none;
+    border-bottom: none;
+    border-radius: 0 var(--radius-md) 0 0;
+}
+
+.scan-frame-corner.bl {
+    bottom: -3px;
+    left: -3px;
+    border-right: none;
+    border-top: none;
+    border-radius: 0 0 0 var(--radius-md);
+}
+
+.scan-frame-corner.br {
+    bottom: -3px;
+    right: -3px;
+    border-left: none;
+    border-top: none;
+    border-radius: 0 0 var(--radius-md) 0;
+}
+
+.scan-tip {
+    text-align: center;
+    padding: var(--space-6);
+    color: white;
+}
+
+.scan-tip-text {
+    font-size: var(--font-size-body);
+    opacity: 0.9;
+}
+
+.scan-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    padding: var(--space-6);
+    padding-bottom: calc(var(--bottom-nav-height) + var(--space-6));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+}
+
+.scan-shutter {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: var(--radius-full);
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.scan-shutter:hover {
+    transform: scale(1.05);
+}
+
+.scan-shutter:active {
+    transform: scale(0.95);
+    background: var(--color-primary);
+}
+
+.scan-shutter-inner {
+    width: 56px;
+    height: 56px;
+    background: white;
+    border-radius: var(--radius-full);
+    transition: all var(--transition-fast);
+}
+
+.scan-shutter:active .scan-shutter-inner {
+    background: var(--color-primary);
+}
+
+.scan-loading {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+.scan-loading.active {
+    display: flex;
+}
+
+.scan-loading-spinner {
+    width: 64px;
+    height: 64px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--space-4);
+}
+
+.scan-loading-text {
+    color: white;
+    font-size: var(--font-size-body-lg);
+    font-weight: var(--font-weight-medium);
+}
+
+.scan-loading-progress {
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-full);
+    margin-top: var(--space-3);
+    overflow: hidden;
+}
+
+.scan-loading-progress-fill {
+    height: 100%;
+    background: var(--color-primary);
+    width: 0%;
+    animation: progress 2.5s ease-out forwards;
+}
+
+@keyframes progress {
+    0% {
+        width: 0%;
+    }
+
+    50% {
+        width: 60%;
+    }
+
+    80% {
+        width: 85%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+/* === AI RESULT === */
+.ai-result-screen {
+    min-height: 100vh;
+}
+
+.ai-result-hero {
+    position: relative;
+    height: 240px;
+}
+
+.ai-result-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: var(--color-surface);
+}
+
+.ai-result-back {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+.ai-result-content {
+    padding: var(--space-4);
+    margin-top: calc(-1 * var(--space-6));
+    position: relative;
+}
+
+.ai-result-section {
+    margin-bottom: var(--space-6);
+}
+
+.ai-result-section-title {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3);
+}
+
+.ai-result-alternatives {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.ai-result-actions {
+    display: flex;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    padding-bottom: calc(var(--bottom-nav-height) + var(--space-4));
+    position: sticky;
+    bottom: 0;
+    background: var(--color-background);
+    border-top: 1px solid var(--color-border-light);
+}
+
+/* === DISCOVER MAP === */
+.discover-screen {
+    min-height: 100vh;
+    position: relative;
+}
+
+.discover-map {
+    height: 55vh;
+    min-height: 300px;
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.discover-map::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(34, 197, 94, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 197, 94, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.discover-map-pin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.discover-map-user {
+    position: absolute;
+    top: 55%;
+    left: 45%;
+    width: 16px;
+    height: 16px;
+    background: var(--color-info);
+    border: 3px solid white;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0.2);
+}
+
+.discover-search {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    right: var(--space-4);
+    z-index: 10;
+}
+
+.discover-filter-btn {
+    position: absolute;
+    top: calc(var(--space-4) + 52px);
+    right: var(--space-4);
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-caption);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+    font-family: var(--font-family);
+}
+
+.discover-recenter {
+    position: absolute;
+    bottom: calc(45vh + var(--space-4));
+    right: var(--space-4);
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    z-index: 10;
+}
+
+.discover-sheet {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-surface-elevated);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    box-shadow: var(--shadow-2xl);
+    z-index: 20;
+    transition: height var(--transition-normal);
+    height: 45vh;
+    padding-bottom: var(--bottom-nav-height);
+}
+
+.discover-sheet.collapsed {
+    height: 180px;
+}
+
+.discover-sheet-handle {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-3);
+    cursor: grab;
+}
+
+.discover-sheet-handle::after {
+    content: '';
+    width: 40px;
+    height: 4px;
+    background: var(--color-border);
+    border-radius: var(--radius-full);
+}
+
+.discover-sheet-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-4) var(--space-3);
+}
+
+.discover-sheet-title {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+}
+
+.discover-sheet-sort {
+    font-size: var(--font-size-caption);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-medium);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-family);
+}
+
+.discover-sheet-content {
+    padding: 0 var(--space-4);
+    overflow-y: auto;
+    max-height: calc(45vh - 80px - var(--bottom-nav-height));
+}
+
+.discover-sheet.collapsed .discover-sheet-content {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: var(--space-4);
+}
+
+.discover-sheet:not(.collapsed) .discover-sheet-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.discover-sheet:not(.collapsed) .food-card {
+    width: 100%;
+    display: flex;
+    gap: var(--space-3);
+}
+
+.discover-sheet:not(.collapsed) .food-card-image {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.discover-sheet:not(.collapsed) .food-card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
