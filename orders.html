@@ -312,16 +312,16 @@
 
             <!-- Tabs -->
             <div class="tabs">
-                <button class="tab active">All Orders</button>
-                <button class="tab">Delivering</button>
-                <button class="tab">Completed</button>
-                <button class="tab">Cancelled</button>
+                <button class="tab active" data-filter="all">All Orders</button>
+                <button class="tab" data-filter="delivering">Delivering</button>
+                <button class="tab" data-filter="completed">Completed</button>
+                <button class="tab" data-filter="cancelled">Cancelled</button>
             </div>
 
             <!-- Orders List -->
             <div class="orders-list">
                 <!-- Order 1 - Delivering -->
-                <div class="order-card">
+                <div class="order-card" data-status="delivering">
                     <div class="order-header">
                         <div>
                             <div class="order-id">Order #FD2024012</div>
@@ -357,8 +357,54 @@
                     </div>
                 </div>
 
+                <!-- Order 1.5 - Delivering -->
+                <div class="order-card" data-status="delivering">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024013</div>
+                            <div class="order-date">Today, 5:30 PM</div>
+                        </div>
+                        <span class="status-badge status-delivering">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">local_shipping</span>
+                            Delivering
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200&q=80"
+                                alt="Salad" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Mediterranean Salad Bowl</div>
+                                <div class="item-details">x1 • Extra feta cheese</div>
+                            </div>
+                            <div class="item-price">₫95,000</div>
+                        </div>
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&q=80"
+                                alt="Smoothie" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Green Detox Smoothie</div>
+                                <div class="item-details">x1</div>
+                            </div>
+                            <div class="item-price">₫45,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫140,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">Track Order</button>
+                            <button class="btn btn-primary">Contact Support</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Order 2 - Completed -->
-                <div class="order-card">
+                <div class="order-card" data-status="completed">
                     <div class="order-header">
                         <div>
                             <div class="order-id">Order #FD2024011</div>
@@ -407,7 +453,7 @@
                 </div>
 
                 <!-- Order 3 - Completed -->
-                <div class="order-card">
+                <div class="order-card" data-status="completed">
                     <div class="order-header">
                         <div>
                             <div class="order-id">Order #FD2024010</div>
@@ -447,7 +493,7 @@
                 </div>
 
                 <!-- Order 4 - Completed -->
-                <div class="order-card">
+                <div class="order-card" data-status="completed">
                     <div class="order-header">
                         <div>
                             <div class="order-id">Order #FD2024009</div>
@@ -482,18 +528,259 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Order 4.5 - Completed -->
+                <div class="order-card" data-status="completed">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024008A</div>
+                            <div class="order-date">Jan 27, 2024</div>
+                        </div>
+                        <span class="status-badge status-completed">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">check_circle</span>
+                            Completed
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=200&q=80"
+                                alt="Soup" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Tom Yum Goong</div>
+                                <div class="item-details">x1 • Spicy level 3</div>
+                            </div>
+                            <div class="item-price">₫95,000</div>
+                        </div>
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=200&q=80"
+                                alt="Rice" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Thai Fried Rice</div>
+                                <div class="item-details">x1</div>
+                            </div>
+                            <div class="item-price">₫65,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫160,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">star</span>
+                                Rate Order
+                            </button>
+                            <button class="btn btn-primary">Reorder</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 5 - Cancelled -->
+                <div class="order-card" data-status="cancelled">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024008</div>
+                            <div class="order-date">Jan 27, 2024</div>
+                        </div>
+                        <span class="status-badge status-cancelled">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">cancel</span>
+                            Cancelled
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=200&q=80"
+                                alt="Burger" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Classic Cheese Burger</div>
+                                <div class="item-details">x1</div>
+                            </div>
+                            <div class="item-price">₫85,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫85,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Reorder</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 6 - Cancelled -->
+                <div class="order-card" data-status="cancelled">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024007</div>
+                            <div class="order-date">Jan 26, 2024</div>
+                        </div>
+                        <span class="status-badge status-cancelled">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">cancel</span>
+                            Cancelled
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=200&q=80"
+                                alt="Pizza" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Margherita Pizza</div>
+                                <div class="item-details">x1 • Large</div>
+                            </div>
+                            <div class="item-price">₫150,000</div>
+                        </div>
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1598614187854-26a60e982dc4?w=200&q=80"
+                                alt="Fries" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Truffle Fries</div>
+                                <div class="item-details">x1</div>
+                            </div>
+                            <div class="item-price">₫55,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫205,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Reorder</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 6.5 - Delivering -->
+                <div class="order-card" data-status="delivering">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024014</div>
+                            <div class="order-date">Today, 7:00 PM</div>
+                        </div>
+                        <span class="status-badge status-delivering">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">local_shipping</span>
+                            Delivering
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=200&q=80"
+                                alt="Pancakes" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Fluffy Pancakes Stack</div>
+                                <div class="item-details">x1 • Maple syrup & berries</div>
+                            </div>
+                            <div class="item-price">₫75,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫75,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">Track Order</button>
+                            <button class="btn btn-primary">Contact Support</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order 7 - Cancelled -->
+                <div class="order-card" data-status="cancelled">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #FD2024006</div>
+                            <div class="order-date">Jan 25, 2024</div>
+                        </div>
+                        <span class="status-badge status-cancelled">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">cancel</span>
+                            Cancelled
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=200&q=80"
+                                alt="Sushi" class="item-image">
+                            <div class="item-info">
+                                <div class="item-name">Premium Sushi Platter</div>
+                                <div class="item-details">x1 • 20 pieces</div>
+                            </div>
+                            <div class="item-price">₫280,000</div>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₫280,000</div>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn btn-outline">View Details</button>
+                            <button class="btn btn-primary">Reorder</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
     </div>
 
     <script>
-        // Tab functionality
+        // Tab functionality with filtering
         const tabs = document.querySelectorAll('.tab');
+        const orderCards = document.querySelectorAll('.order-card');
+
+        // Function to filter orders
+        function filterOrders(filter) {
+            orderCards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const status = card.getAttribute('data-status');
+                    if (status === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Add click event to tabs
         tabs.forEach(tab => {
             tab.addEventListener('click', function () {
+                // Remove active class from all tabs
                 tabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
                 this.classList.add('active');
+                
+                // Get filter value and apply filter
+                const filter = this.getAttribute('data-filter');
+                filterOrders(filter);
             });
+        });
+
+        // Initialize: show all orders on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const activeTab = document.querySelector('.tab.active');
+            if (activeTab) {
+                const initialFilter = activeTab.getAttribute('data-filter');
+                filterOrders(initialFilter);
+            }
         });
     </script>
 </body>

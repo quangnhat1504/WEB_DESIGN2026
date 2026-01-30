@@ -118,7 +118,7 @@
         }
 
         .nutrition-card {
-            background: linear-gradient(135deg, var(--color-surface-elevated), rgba(54, 31, 23, 0.8));
+            background: linear-gradient(135deg, rgba(255, 249, 245, 0.95), rgba(255, 243, 235, 0.9));
             border: 1px solid var(--color-border);
             border-radius: 16px;
             padding: 20px;
@@ -135,7 +135,7 @@
         .macro-item {
             text-align: center;
             padding: 12px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 12px;
         }
 
@@ -248,7 +248,7 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, var(--color-surface-elevated), rgba(54, 31, 23, 0.8));
+            background: linear-gradient(135deg, rgba(255, 249, 245, 0.95), rgba(255, 243, 235, 0.9));
             border: 1px solid var(--color-border);
             border-radius: 16px;
             padding: 24px;
@@ -455,6 +455,102 @@
                                 <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
                             </button>
                         </div>
+                    </div>
+                </div>
+
+                <!-- User Follow-up Question -->
+                <div class="chat-message user">
+                    <img src="https://i.pravatar.cc/80?img=5" alt="User" class="chat-avatar">
+                    <div class="chat-bubble">
+                        <p style="margin: 0;">That looks perfect! How many calories should I aim for per day to maintain my weight?</p>
+                    </div>
+                </div>
+
+                <!-- AI Response about Calories -->
+                <div class="chat-message">
+                    <div class="chat-avatar ai">
+                        <span class="material-symbols-outlined">psychology</span>
+                    </div>
+                    <div class="chat-bubble">
+                        <p style="margin: 0 0 8px 0; font-weight: 600;">Based on your profile 📊</p>
+                        <p style="margin: 0 0 12px 0;">For weight maintenance, I recommend around <strong>2,000-2,200 calories per day</strong>. This is based on your activity level and current stats.</p>
+                        <p style="margin: 0; padding: 12px; background: rgba(255, 105, 51, 0.1); border-radius: 8px; font-size: 14px;">
+                            💡 <strong>Tip:</strong> Focus on balanced macros: 30% protein, 40% carbs, 30% healthy fats for optimal results.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- User Question about Snacks -->
+                <div class="chat-message user">
+                    <img src="https://i.pravatar.cc/80?img=5" alt="User" class="chat-avatar">
+                    <div class="chat-bubble">
+                        <p style="margin: 0;">What are some healthy snack options I can have between meals?</p>
+                    </div>
+                </div>
+
+                <!-- AI Response with Snack Suggestions -->
+                <div class="chat-message">
+                    <div class="chat-avatar ai">
+                        <span class="material-symbols-outlined">psychology</span>
+                    </div>
+                    <div class="chat-bubble">
+                        <p style="margin: 0 0 12px 0; font-weight: 600;">Here are my top 5 healthy snack recommendations 🍓</p>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 8px;">
+                                <span style="font-size: 20px;">🥜</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size: 14px;">Mixed Nuts</div>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary);">~170 cal • High in healthy fats</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 8px;">
+                                <span style="font-size: 20px;">🍎</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size: 14px;">Apple with Peanut Butter</div>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary);">~200 cal • Great energy boost</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 8px;">
+                                <span style="font-size: 20px;">🥒</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size: 14px;">Veggie Sticks with Hummus</div>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary);">~120 cal • Low calorie, filling</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 8px;">
+                                <span style="font-size: 20px;">🥚</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size: 14px;">Hard-Boiled Eggs</div>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary);">~140 cal • High protein</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 8px;">
+                                <span style="font-size: 20px;">🥤</span>
+                                <div>
+                                    <div style="font-weight: 600; font-size: 14px;">Greek Yogurt with Berries</div>
+                                    <div style="font-size: 12px; color: var(--color-text-secondary);">~150 cal • Protein & probiotics</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Appreciation -->
+                <div class="chat-message user">
+                    <img src="https://i.pravatar.cc/80?img=5" alt="User" class="chat-avatar">
+                    <div class="chat-bubble">
+                        <p style="margin: 0;">Thank you! This is really helpful. I'll try the Greek yogurt option. 😊</p>
+                    </div>
+                </div>
+
+                <!-- AI Final Response -->
+                <div class="chat-message">
+                    <div class="chat-avatar ai">
+                        <span class="material-symbols-outlined">psychology</span>
+                    </div>
+                    <div class="chat-bubble">
+                        <p style="margin: 0 0 8px 0; font-weight: 600;">You're welcome, Sarah! 🌟</p>
+                        <p style="margin: 0;">Greek yogurt is an excellent choice - it's packed with protein and probiotics for gut health. Feel free to ask me anything else about nutrition, meal planning, or your health goals anytime!</p>
                     </div>
                 </div>
 
