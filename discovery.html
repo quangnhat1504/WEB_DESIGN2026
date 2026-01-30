@@ -26,26 +26,106 @@
             font-family: var(--font-family);
         }
 
-        .top-bar-custom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 24px;
-            background: var(--color-background);
-            border-bottom: 1px solid var(--color-border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
         .app-layout {
             display: flex;
-            min-height: calc(100vh - 72px);
+            min-height: 100vh;
+        }
+
+        .sidebar-left {
+            width: 280px;
+            background: var(--color-background);
+            border-right: 1px solid var(--color-border);
+            padding: 24px;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        @media (min-width: 1024px) {
+            .sidebar-left {
+                display: flex;
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--color-primary), #ea580c);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(255, 105, 51, 0.2);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-text-primary);
+        }
+
+        .nav-link.active {
+            background: var(--color-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 105, 51, 0.25);
+        }
+
+        .nav-link .material-symbols-outlined {
+            font-size: 24px;
+        }
+
+        .nav-link.active .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--color-surface-elevated);
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--color-surface);
         }
 
         .main-content {
             flex: 1;
             padding: 32px 24px;
+            max-width: 900px;
         }
 
         .sidebar-right {
@@ -57,8 +137,8 @@
             flex-direction: column;
             gap: 24px;
             position: sticky;
-            top: 72px;
-            height: calc(100vh - 72px);
+            top: 0;
+            height: 100vh;
             overflow-y: auto;
         }
 
@@ -172,48 +252,88 @@
 </head>
 
 <body>
-    <!-- Top Bar -->
-    <div class="top-bar-custom">
-        <div style="display: flex; align-items: center; gap: 32px;">
-            <!-- Logo -->
-            <a href="index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-                <div
-                    style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--color-primary), #ea580c); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px;">
-                    F
+    <div class="app-layout">
+        <!-- Left Sidebar -->
+        <aside class="sidebar-left">
+            <div>
+                <!-- Logo -->
+                <div class="logo">
+                    <div class="logo-icon">F</div>
+                    <div>
+                        <h1 style="font-size: 18px; font-weight: 700; margin: 0;">FoodAI</h1>
+                        <span style="font-size: 12px; color: var(--color-text-secondary); font-weight: 500;">Premium</span>
+                    </div>
                 </div>
-                <span style="font-size: 18px; font-weight: 700; color: var(--color-text-primary);">FoodAI</span>
-            </a>
 
-            <!-- Nav Tabs -->
-            <nav style="display: flex; gap: 8px;">
-                <a href="social-feed.html" class="chip">Social</a>
-                <a href="discovery.html" class="chip active">Delivery</a>
-                <a href="#" class="chip">Nutrition</a>
-            </nav>
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 16px;">
-            <!-- Search -->
-            <div class="search-bar" style="width: 300px;">
-                <span class="material-symbols-outlined search-bar-icon">search</span>
-                <input type="text" class="search-bar-input" placeholder="Search dishes...">
+                <!-- Navigation -->
+                <nav style="display: flex; flex-direction: column; gap: 8px;">
+                    <a href="social-feed.html" class="nav-link">
+                        <span class="material-symbols-outlined">home</span>
+                        <span>Home</span>
+                    </a>
+                    <a href="discovery.html" class="nav-link active">
+                        <span class="material-symbols-outlined">explore</span>
+                        <span>Explore</span>
+                    </a>
+                    <a href="ai-nutritionist.html" class="nav-link">
+                        <span class="material-symbols-outlined">psychology</span>
+                        <span>AI Nutritionist</span>
+                    </a>
+                    <a href="orders.html" class="nav-link">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        <span>Orders</span>
+                    </a>
+                    <a href="saved.html" class="nav-link">
+                        <span class="material-symbols-outlined">favorite</span>
+                        <span>Saved</span>
+                    </a>
+                </nav>
             </div>
 
-            <!-- Icons -->
-            <button class="btn-icon">
-                <span class="material-symbols-outlined">notifications</span>
-            </button>
-            <button class="btn-icon">
-                <span class="material-symbols-outlined">shopping_cart</span>
-            </button>
-            <img src="https://i.pravatar.cc/80?img=5" alt="User"
-                style="width: 36px; height: 36px; border-radius: 50%; cursor: pointer;">
-        </div>
-    </div>
+            <!-- User Profile -->
+            <div class="user-profile">
+                <img src="https://i.pravatar.cc/80?img=5" alt="User" class="user-avatar">
+                <div style="flex: 1; min-width: 0;">
+                    <div style="font-weight: 600; font-size: 14px; color: var(--color-text-primary);">Sarah Nguyen</div>
+                    <div style="font-size: 12px; color: var(--color-text-secondary);">Gold Member</div>
+                </div>
+                <button class="btn-icon">
+                    <span class="material-symbols-outlined" style="font-size: 20px;">more_vert</span>
+                </button>
+            </div>
+        </aside>
 
-    <div class="app-layout">
         <!-- Main Content -->
-        <main class="main-content" style="max-width: 1200px; margin: 0 auto;">
+        <main class="main-content">
+            <!-- Top Bar -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--color-border);">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <!-- Nav Tabs -->
+                    <nav style="display: flex; gap: 8px;">
+                        <a href="social-feed.html" class="chip">Social</a>
+                        <a href="discovery.html" class="chip active">Delivery</a>
+                        <a href="ai-nutritionist.html" class="chip">Nutrition</a>
+                    </nav>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <!-- Search -->
+                    <div class="search-bar" style="width: 300px;">
+                        <span class="material-symbols-outlined search-bar-icon">search</span>
+                        <input type="text" class="search-bar-input" placeholder="Search dishes...">
+                    </div>
+
+                    <!-- Icons -->
+                    <button class="btn-icon">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <button class="btn-icon">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                    </button>
+                </div>
+            </div>
+
+            <div style="max-width: 1200px; margin: 0 auto;">
             <!-- Page Header -->
             <div style="margin-bottom: 32px;">
                 <h1 style="font-size: 32px; font-weight: 700; margin: 0 0 8px 0;">Da Nang's Daily Top 5</h1>
@@ -495,6 +615,9 @@
             </div>
         </aside>
     </div>
+</body>
+
+</html>
 </body>
 
 </html>
